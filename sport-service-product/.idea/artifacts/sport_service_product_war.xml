@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sport-service-product:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="sport-service-product-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="sport-service-product:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sport-common" />
+        <module name="sport-console" />
+        <module name="sport-dao" />
+        <module name="sport-interface" />
+        <module name="sport-login" />
+        <module name="sport-pojo" />
+        <module name="sport-portal" />
+        <module name="sport-service-buyer" />
+        <module name="sport-service-cms" />
+        <module name="sport-service-product" />
+        <module name="sport-service-solr" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

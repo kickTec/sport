@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo        
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<!-- dubbo服务提供方 -->
+	
+	<!-- 配置dubbo服务名：用于monitor监控 -->
+	<dubbo:application name="service-product"/>
+	
+	<!-- 配置dubbo的注册中心 -->
+	<!--<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>-->
+
+    <!--dubbo直连-->
+	<dubbo:registry address="N/A" />
+	
+	<!-- 配置dubbo协议 -->
+	<dubbo:protocol name="dubbo" port="20880"/>
+	
+	<!-- 将接口暴露到注册中心  ref引用具体的实现类-->
+    <dubbo:service ref="brandService" interface="com.kenick.sport.service.product.BrandService"
+				   class="com.kenick.sport.serviceImpl.product.BrandServiceImpl"/>
+	<dubbo:service ref="uploadService" interface="com.kenick.sport.service.upload.UploadService"
+				   class="com.kenick.sport.serviceImpl.upload.UploadServiceImpl"/>
+</beans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-console" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-login" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-portal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-service-buyer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-service-buyer-testLong123455666" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-service-cms" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-service-product" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sport-service-solr" charset="UTF-8" />
+  </component>
+</project>
