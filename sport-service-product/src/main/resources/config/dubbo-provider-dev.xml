@@ -39,4 +39,6 @@
 				   class="com.kenick.sport.serviceImpl.product.BrandServiceImpl"/>
 	<dubbo:service ref="uploadService" interface="com.kenick.sport.service.upload.UploadService"
 				   class="com.kenick.sport.serviceImpl.upload.UploadServiceImpl"/>
+	<dubbo:service ref="productService" interface="com.kenick.sport.service.product.ProductService"
+				   class="com.kenick.sport.serviceImpl.product.ProductServiceImpl"/>
 </beans>

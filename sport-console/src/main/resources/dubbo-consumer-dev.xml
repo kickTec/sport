@@ -31,6 +31,7 @@
 	<!-- 配置引用注册中心的服务-->
 	<dubbo:reference id="brandService" interface="com.kenick.sport.service.product.BrandService" url="dubbo://127.0.0.1:20880" check="false"/>
 	<dubbo:reference id="uploadService" interface="com.kenick.sport.service.upload.UploadService" url="dubbo://127.0.0.1:20880" check="false"/>
+	<dubbo:reference id="productService" interface="com.kenick.sport.service.product.ProductService" url="dubbo://127.0.0.1:20880" check="false"/>
 
 	<dubbo:consumer timeout="600000"/>
 		

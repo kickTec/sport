@@ -1,5 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../head.jsp" %>
+<%
+	String basePath = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -91,8 +94,13 @@ function uploadPic(){
 <body>
 <div class="box-positon">
 	<div class="rpos">当前位置: 商品管理 - 添加</div>
-	<form class="ropt">
-		<input type="submit" onclick="this.form.action='v_list.do';" value="返回列表" class="return-button"/>
+	<form class="ropt" action="<%=basePath%>/product/list.do">
+		<input type="hidden" name="productName" value="${listProductName}"/>
+		<input type="hidden" name="brandId" value="${listBrandId}"/>
+		<input type="hidden" name="isShow" value="${listIsShow}"/>
+		<input type="hidden" name="pageNo" value="${pageNo}"/>
+		<input type="hidden" name="pageSize" value="${pageSize}"/>
+		<input type="submit" value="返回列表" class="return-button"/>
 	</form>
 	<div class="clear"></div>
 </div>

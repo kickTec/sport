@@ -19,5 +19,19 @@
         <module name="sport-service-solr" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sport" target="1.7" />
+      <module name="sport-common" target="1.7" />
+      <module name="sport-console" target="1.7" />
+      <module name="sport-dao" target="1.7" />
+      <module name="sport-interface" target="1.7" />
+      <module name="sport-login" target="1.7" />
+      <module name="sport-pojo" target="1.7" />
+      <module name="sport-portal" target="1.7" />
+      <module name="sport-service-buyer" target="1.7" />
+      <module name="sport-service-cms" target="1.7" />
+      <module name="sport-service-product" target="1.7" />
+      <module name="sport-service-solr" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

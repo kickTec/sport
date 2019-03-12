@@ -14,7 +14,6 @@ public class ProductQuery {
     protected Integer pageNo = 1;
 
     protected Integer startRow; // 起始行
-    protected Integer maxNum; // 最大数目
 
     protected Integer pageSize = 10;
 
@@ -1200,13 +1199,5 @@ public class ProductQuery {
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
         }
-    }
-
-    public Integer getMaxNum() {
-        return maxNum;
-    }
-
-    public void setMaxNum(Integer maxNum) {
-        this.maxNum = maxNum;
     }
 }

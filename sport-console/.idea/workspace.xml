@@ -6,7 +6,37 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed28b990-785e-4e60-8c51-971261bf5163" name="Default Changelist" comment="" />
+    <list default="true" id="ed28b990-785e-4e60-8c51-971261bf5163" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kenick/sport/PaginationUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sport-interface/src/main/java/com/kenick/sport/service/product/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sport-service-product/src/main/java/com/kenick/sport/serviceImpl/product/ProductServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sport-service-product/src/test/java/TestProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sport-console.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dubbo-consumer-dev.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dubbo-consumer-dev.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/add.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/add.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/ad/AdvertisingMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/ad/PositionMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/order/DetailMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/order/OrderMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/BrandMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/ColorMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/ProductMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/SkuMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/user/BuyerMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-pojo/src/main/java/com/kenick/sport/pojo/product/ProductQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sport-pojo/src/main/java/com/kenick/sport/pojo/product/ProductQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-service-product/sport-service-product.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-service-product/src/main/resources/config/dubbo-provider-dev.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sport-service-product/src/main/resources/config/dubbo-provider-dev.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport-service-solr/sport-service-solr.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sport.iml" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,42 +48,42 @@
     <session id="-1069195160">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="17" />
-          <entry key="project.open.time.2" value="5" />
+          <entry key="project.closed" value="20" />
+          <entry key="project.open.time.2" value="8" />
           <entry key="project.open.time.24" value="1" />
-          <entry key="project.open.time.3" value="8" />
+          <entry key="project.open.time.3" value="9" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="17" />
+          <entry key="project.opened" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="4" />
           <entry key="css" value="6" />
-          <entry key="java" value="25" />
-          <entry key="jsp" value="24" />
+          <entry key="java" value="29" />
+          <entry key="jsp" value="25" />
           <entry key="txt" value="1" />
-          <entry key="xml" value="5" />
+          <entry key="xml" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="4" />
           <entry key="CSS" value="6" />
-          <entry key="JAVA" value="25" />
-          <entry key="JSP" value="24" />
+          <entry key="JAVA" value="29" />
+          <entry key="JSP" value="25" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="XML" value="5" />
+          <entry key="XML" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="class" value="3" />
           <entry key="css" value="9" />
-          <entry key="java" value="4102" />
-          <entry key="jsp" value="6357" />
+          <entry key="java" value="7410" />
+          <entry key="jsp" value="7280" />
           <entry key="xml" value="159" />
         </counts>
       </usages-collector>
@@ -61,24 +91,23 @@
         <counts>
           <entry key="CLASS" value="3" />
           <entry key="CSS" value="9" />
-          <entry key="JAVA" value="4102" />
-          <entry key="JSP" value="6357" />
+          <entry key="JAVA" value="7410" />
+          <entry key="JSP" value="7280" />
           <entry key="XML" value="159" />
         </counts>
       </usages-collector>
     </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="sport-console" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-              <folding>
-                <element signature="e#287#288#0" expanded="true" />
-                <element signature="e#324#325#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="361">
+              <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -86,8 +115,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+            <state relative-caret-position="760">
+              <caret line="40" column="53" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/add.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -103,10 +141,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>a</find>
-      <find>a:hover</find>
-      <find>form</find>
-      <find>品牌名称</find>
       <find>upload</find>
       <find>previewPic</find>
       <find>确定上传</find>
@@ -120,7 +154,6 @@
       <find>上传</find>
       <find>imgur</find>
       <find>修改</find>
-      <find>添加</find>
       <find>uploadFileId</find>
       <find>addSubmit</find>
       <find>每页显示</find>
@@ -133,6 +166,11 @@
       <find>ids</find>
       <find>删除</find>
       <find>optDelete</find>
+      <find>商品</find>
+      <find>查询</find>
+      <find>上架</find>
+      <find>添加</find>
+      <find>返回</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -141,6 +179,9 @@
     <dirStrings>
       <dir>C:\workspace\idea_workspace\sport\sport-console</dir>
     </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -158,6 +199,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/ProductController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/UploadController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/frame/product_left.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/kenick/sport/PaginationUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/add.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp" />
       </list>
     </option>
   </component>
@@ -174,6 +219,13 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="MavenProjectNavigator">
     <treeState>
       <expand>
@@ -185,7 +237,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="140" />
     <option name="y" value="55" />
     <option name="width" value="1024" />
@@ -563,12 +615,12 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -582,95 +634,18 @@
               <item name="sport-console" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kenick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kenick" type="462c0819:PsiDirectoryNode" />
-              <item name="sport" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kenick" type="462c0819:PsiDirectoryNode" />
-              <item name="sport" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kenick" type="462c0819:PsiDirectoryNode" />
-              <item name="sport" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sport-console" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sport-console" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/workspace/idea_workspace/sport/sport-console/src/main/java/com/kenick/sport/controller/UploadController.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552268015275" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552321625676" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -678,7 +653,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="coverage" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -692,7 +667,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Tomcat Server.tomcat2">
+    <configuration name="PaginationUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.kenick.sport.PaginationUtil" />
+      <module name="sport-console" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kenick.sport.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="tomcat2" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.91-2" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8082/console/center/index.do" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
@@ -769,6 +757,15 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Tomcat Server.tomcat2" />
+      <item itemvalue="Application.PaginationUtil" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PaginationUtil" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration>C:\Users\zhanggw\AppData\Roaming\Subversion</configuration>
@@ -797,37 +794,49 @@
       <workItem from="1552125750073" duration="6970000" />
       <workItem from="1552135298284" duration="757000" />
       <workItem from="1552265579532" duration="1791000" />
+      <workItem from="1552271875216" duration="233000" />
+      <workItem from="1552292653418" duration="6077000" />
+      <workItem from="1552310105054" duration="11411000" />
+      <workItem from="1552354836739" duration="1612000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82843000" />
+    <option name="totallyTimeSpent" value="102176000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23524962" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49884528" visible="true" weight="0.20272315" />
+      <window_info id="Structure" order="1" sideWeight="0.5011547" side_tool="true" weight="0.20272315" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Favorites" order="5" sideWeight="0.5011547" side_tool="true" weight="0.20272315" />
       <window_info id="Capture Tool" order="6" />
-      <window_info id="Web" order="7" side_tool="true" />
+      <window_info id="Web" order="7" sideWeight="0.5011547" side_tool="true" weight="0.20272315" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3229508" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.34262297" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3464696" />
+      <window_info active="true" anchor="bottom" x="43" y="391" width="1322" height="194" id="Debug" order="3" sideWeight="0.49924356" visible="true" weight="0.28899837" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.30491802" />
-      <window_info anchor="bottom" id="Spring" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3295082" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3295082" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32840723" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.30377668" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32840723" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.25615764" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.37110016" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32840723" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32840723" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -937,24 +946,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/brand/BrandController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/upload/UploadController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1045,21 +1040,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/brand/BrandController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+        <state relative-caret-position="201">
+          <caret line="105" column="64" lean-forward="true" selection-start-line="105" selection-start-column="64" selection-end-line="105" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/PaginationUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-          <folding>
-            <element signature="e#287#288#0" expanded="true" />
-            <element signature="e#324#325#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="361">
+          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="40" column="53" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
         </state>
       </provider>
     </entry>
