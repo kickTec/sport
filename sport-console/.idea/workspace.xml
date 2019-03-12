@@ -7,35 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed28b990-785e-4e60-8c51-971261bf5163" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kenick/sport/PaginationUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sport-interface/src/main/java/com/kenick/sport/service/product/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sport-service-product/src/main/java/com/kenick/sport/serviceImpl/product/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sport-service-product/src/test/java/TestProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/uiDesigner.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-console.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dubbo-consumer-dev.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dubbo-consumer-dev.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/add.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/add.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/console/product/list.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/ad/AdvertisingMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/ad/PositionMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/order/DetailMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/order/OrderMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/BrandMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/ColorMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/ProductMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/product/SkuMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-dao/src/main/java/com/kenick/sport/mapper/user/BuyerMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-pojo/src/main/java/com/kenick/sport/pojo/product/ProductQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sport-pojo/src/main/java/com/kenick/sport/pojo/product/ProductQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-service-product/sport-service-product.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-service-product/src/main/resources/config/dubbo-provider-dev.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sport-service-product/src/main/resources/config/dubbo-provider-dev.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport-service-solr/sport-service-solr.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sport.iml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -106,8 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+            <state relative-caret-position="190">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -797,12 +771,12 @@
       <workItem from="1552271875216" duration="233000" />
       <workItem from="1552292653418" duration="6077000" />
       <workItem from="1552310105054" duration="11411000" />
-      <workItem from="1552354836739" duration="1612000" />
+      <workItem from="1552354836739" duration="2028000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102176000" />
+    <option name="totallyTimeSpent" value="102592000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -814,7 +788,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49884528" visible="true" weight="0.20272315" />
       <window_info id="Structure" order="1" sideWeight="0.5011547" side_tool="true" weight="0.20272315" />
@@ -1066,8 +1041,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kenick/sport/controller/product/ProductController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        <state relative-caret-position="190">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
         </state>
       </provider>
     </entry>

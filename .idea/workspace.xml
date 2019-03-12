@@ -7,35 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56d70b8f-0687-4dea-b492-343f88fb54c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sport-console/src/main/java/com/kenick/sport/PaginationUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sport-interface/src/main/java/com/kenick/sport/service/product/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sport-service-product/src/main/java/com/kenick/sport/serviceImpl/product/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sport-service-product/src/test/java/TestProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sport-console/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sport-console/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-console/sport-console.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-console/src/main/java/com/kenick/sport/controller/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sport-console/src/main/java/com/kenick/sport/controller/product/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-console/src/main/resources/dubbo-consumer-dev.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sport-console/src/main/resources/dubbo-consumer-dev.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-console/src/main/webapp/WEB-INF/console/product/add.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/sport-console/src/main/webapp/WEB-INF/console/product/add.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-console/src/main/webapp/WEB-INF/console/product/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/sport-console/src/main/webapp/WEB-INF/console/product/list.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/ad/AdvertisingMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/ad/PositionMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/order/DetailMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/order/OrderMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/product/BrandMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/product/ColorMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/product/ProductMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/product/SkuMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-dao/src/main/java/com/kenick/sport/mapper/user/BuyerMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-pojo/src/main/java/com/kenick/sport/pojo/product/ProductQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/sport-pojo/src/main/java/com/kenick/sport/pojo/product/ProductQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-service-product/sport-service-product.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-service-product/src/main/resources/config/dubbo-provider-dev.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sport-service-product/src/main/resources/config/dubbo-provider-dev.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport-service-solr/sport-service-solr.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport.iml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/sport-pojo/target/" />
     <ignored path="$PROJECT_DIR$/sport-service-solr/target/" />
@@ -65,19 +39,50 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="gitignore" value="22" />
           <entry key="txt" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="34" />
+          <entry key="PLAIN_TEXT" value="56" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gitignore" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -98,7 +103,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="140" />
     <option name="y" value="55" />
     <option name="width" value="1024" />
@@ -130,7 +135,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552356568647" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552356986509" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/cmd/git.exe" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -311,15 +316,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1552354154310</updated>
-      <workItem from="1552354159172" duration="2296000" />
+      <workItem from="1552354159172" duration="2810000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2296000" />
+    <option name="totallyTimeSpent" value="2810000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" />
       <window_info id="Image Layers" />
@@ -327,7 +333,7 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Capture Tool" />
       <window_info id="Web" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22844176" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22844176" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Application Servers" weight="0.26272577" />
       <window_info anchor="bottom" id="Spring" />
@@ -340,7 +346,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.29885057" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.318555" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.318555" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -360,6 +366,15 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="mavenExecuteGoalHistory">
     <option value="$PROJECT_DIR$" />
