@@ -30,10 +30,10 @@
 <div class="body-box" style="float:right">
 	<form id="jvForm" action="editSubmit.do" method="post" enctype="multipart/form-data">
         <input type="hidden" name="brandId" value="${brand.id}" />
-        <input type="hidden" name="listName" value="${name}"/>
-        <input type="hidden" name="listIsDisplay" value="${isDisplay}"/>
-        <input type="hidden" name="pageNo" value="${listPageNo}"/>
-        <input type="hidden" name="pageSize" value="${listPageSize}"/>
+        <input type="hidden" name="queryName" value="${queryName}"/>
+        <input type="hidden" name="queryIsDisplay" value="${queryIsDisplay}"/>
+        <input type="hidden" name="pageNo" value="${pageNo}"/>
+        <input type="hidden" name="pageSize" value="${pageSize}"/>
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
 			<tbody>
 				<tr>
@@ -96,7 +96,6 @@
 </div>
 <script type="text/javascript">
     var local = window.location;
-    var contextPath = local.pathname.split("/")[1];
 
     function previewPic(){
         var uploadFile = document.getElementById("previewPicId");

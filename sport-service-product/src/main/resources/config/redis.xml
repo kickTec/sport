@@ -20,10 +20,11 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<!-- 扫描service，并由spring的bean容器管理 -->
-	<context:component-scan base-package="com.kenick.sport.service"/>
-	<context:component-scan base-package="com.kenick.sport.serviceImpl"/>
-	<context:component-scan base-package="com.kenick.sport.product.serviceImpl"/>
-	
+	<!-- 通过spring管理jedis -->
+	<!-- Jedis jedis = new Jedis(host, port) -->
+	<bean id="jedis" class="redis.clients.jedis.Jedis">
+		<constructor-arg name="host" value="192.168.200.140"/>
+		<constructor-arg name="port" value="6379"/>
+	</bean>
 		
 </beans>

@@ -33,9 +33,9 @@ function isShow(){
 <div class="box-positon">
 	<div class="rpos">当前位置: 商品管理 - 列表</div>
 	<form class="ropt" action="<%=basePath%>/product/add.do" method="post">
-        <input type="hidden" name="listProductName" value="${queryProductName}"/>
-        <input type="hidden" name="listBrandId" value="${queryBrandId}"/>
-        <input type="hidden" name="listIsShow" value="${queryIsShow}"/>
+        <input type="hidden" name="queryProductName" value="${queryProductName}"/>
+        <input type="hidden" name="queryBrandId" value="${queryBrandId}"/>
+        <input type="hidden" name="queryIsShow" value="${queryIsShow}"/>
         <input type="hidden" name="pageNo" value="${pageNo}"/>
         <input type="hidden" name="pageSize" value="${pageSize}"/>
 		<input class="add" type="submit" value="添加"/>
@@ -79,7 +79,16 @@ function isShow(){
                 <td><input type="checkbox" name="ids" value="${product.id}"/></td>
                 <td>${product.id}</td>
                 <td align="center">${product.name}</td>
-                <td align="center"><img width="50" height="50" src="<%=basePath%>${fn:split(product.imgUrl,',')[0]}" alt="暂无"/></td>
+                <td align="center">
+                    <c:choose>
+                        <c:when test="${fn:contains(fn:split(product.imgUrl,',')[0], 'http')}">
+                            <img width="50" height="50" src="${fn:split(product.imgUrl,',')[0]}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <img width="50" height="50" src="<%=basePath%>${fn:split(product.imgUrl,',')[0]}"/>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td align="center">
                     <c:choose>
                         <c:when test="${product.isNew}">是</c:when>
@@ -105,7 +114,10 @@ function isShow(){
                     </c:choose>
                 </td>
                 <td align="center">
-                    <a href="#" class="pn-opt">查看</a> | <a href="#" class="pn-opt">修改</a> | <a href="#" onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt">删除</a> | <a href="../sku/list.jsp" class="pn-opt">库存</a>
+                    <a href="#" class="pn-opt">查看</a> |
+                    <a href="#" class="pn-opt">修改</a> |
+                    <a href="<%=basePath%>/product/deleteProduct.do?productId=${product.id}&pageNo=${pageNo}&pageSize=${pageSize}&queryProductName=${queryProductName}&queryBrandId=${queryBrandId}&queryIsShow=${queryIsShow}" onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt">删除</a> |
+                    <a href="<%=basePath%>/sku/list.do?productId=${product.id}&pageNo=${pageNo}&pageSize=${pageSize}&queryProductName=${queryProductName}&queryBrandId=${queryBrandId}&queryIsShow=${queryIsShow}" class="pn-opt">库存</a> |
                 </td>
             </tr>
         </c:forEach>

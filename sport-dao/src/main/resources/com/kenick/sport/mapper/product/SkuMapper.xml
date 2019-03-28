@@ -13,6 +13,24 @@
     <result column="upper_limit" property="upperLimit" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="ColorResultMap" type="com.kenick.sport.pojo.product.Sku" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="color_id" property="colorId" jdbcType="BIGINT" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="market_price" property="marketPrice" jdbcType="REAL" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="delive_fee" property="deliveFee" jdbcType="REAL" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="upper_limit" property="upperLimit" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <association property="color" javaType="com.kenick.sport.pojo.product.Color">
+        <id column="color_id" property="id"/>
+        <result column="color_name" property="name"/>
+        <result column="color_img_url" property="imgUrl"/>
+        <result column="color_parent_id" property="parentId"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -81,21 +99,27 @@
     </if>
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.kenick.sport.pojo.product.SkuQuery" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from bbs_sku
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-    <if test="startRow != null" >
-      limit #{startRow} , #{pageSize}
-    </if>
+  select
+  <if test="distinct" >
+    distinct
+  </if>
+  <include refid="Base_Column_List" />
+  from bbs_sku
+  <if test="_parameter != null" >
+    <include refid="Example_Where_Clause" />
+  </if>
+  <if test="orderByClause != null" >
+    order by ${orderByClause}
+  </if>
+  <if test="startRow != null" >
+    limit #{startRow} , #{pageSize}
+  </if>
+</select>
+  <select id="selectSkuAndColorByProductId" resultMap="ColorResultMap" parameterType="java.lang.Long" >
+        SELECT s.*,c.`id` color_id,c.`name` color_name,c.`img_url` color_img_url,c.`parent_id` color_parent_id
+        FROM bbs_sku s
+        LEFT JOIN bbs_color c ON s.`color_id` = c.`id`
+        WHERE s.`product_id`= #{productId};
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

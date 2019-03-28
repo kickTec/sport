@@ -12,8 +12,8 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 品牌管理 - 添加</div>
 	<form class="ropt" action="<%=path%>/brand/list.do">
-		<input type="hidden" name="name" value="${listName}"/>
-        <input type="hidden" name="isDisplay" value="${listIsDisplay}"/>
+		<input type="hidden" name="name" value="${queryName}"/>
+        <input type="hidden" name="isDisplay" value="${queryIsDisplay}"/>
         <input type="hidden" name="pageNo" value="${pageNo}"/>
         <input type="hidden" name="pageSize" value="${pageSize}"/>
 		<input type="submit" value="返回列表" class="return-button"/>
@@ -22,8 +22,8 @@
 </div>
 <div class="body-box" style="float:right">
 	<form id="jvForm" action="<%=path%>/brand/addSubmit.do" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="listName" value="${listName}"/>
-        <input type="hidden" name="listIsDisplay" value="${listIsDisplay}"/>
+        <input type="hidden" name="queryName" value="${queryName}"/>
+        <input type="hidden" name="queryIsDisplay" value="${queryIsDisplay}"/>
         <input type="hidden" name="pageNo" value="${pageNo}"/>
         <input type="hidden" name="pageSize" value="${pageSize}"/>
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">

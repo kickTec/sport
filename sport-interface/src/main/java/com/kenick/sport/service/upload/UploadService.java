@@ -8,4 +8,10 @@ public interface UploadService {
      * @return fastDFS文件id
      */
     String fastDFSUploadFile(byte[] fileByte,String fileName);
+
+    /**
+     *  测试fastDFS是否正在连接
+     * @return true:正在连接 false:否
+     */
+    Boolean fastDFSIsConn();
 }

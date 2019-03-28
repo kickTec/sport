@@ -24,4 +24,18 @@ public interface ProductService {
      * @return 商品总数
      */
     Integer getProductTotalSize(String productName,Long brandId,Boolean isShow);
+
+    /**
+     *  保存商品信息
+     * @param product 商品信息
+     * @return 受影响的行
+     */
+    Integer saveProduct(Product product);
+
+    /**
+     *  通过id删除商品信息
+     * @param productId 商品id
+     * @return 受影响的行
+     */
+    Integer deleteProductById(Long productId);
 }

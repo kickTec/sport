@@ -1,9 +1,11 @@
 package com.kenick.sport.controller.brand;
 
+import com.kenick.sport.controller.BaseController;
 import com.kenick.sport.pojo.product.Brand;
 import com.kenick.sport.pojo.product.BrandQuery;
 import com.kenick.sport.service.product.BrandService;
 import com.kenick.sport.service.upload.UploadService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,41 +21,39 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/brand")
-public class BrandController {
+public class BrandController extends BaseController {
+    @Autowired
+    public void setBaseUploadService(UploadService uploadService){
+        super.setUploadService(uploadService);
+    }
+
     private final static Integer MIN_PAGESIZE = 5;
 
     @Resource
     private BrandService brandService;
 
-    @Resource
-    private UploadService uploadService;
-
     @RequestMapping("/add.do")
-    public String add(String listName, Integer listIsDisplay, Integer pageNo, Integer pageSize,
+    public String add(String queryName, Integer queryIsDisplay, Integer pageNo, Integer pageSize,
                       Model model,HttpServletRequest request){
-        if(listName != null){
+        if(queryName != null){
             if("GET".equals(request.getMethod())){
-                listName = new String(listName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+                queryName = new String(queryName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
             }
         }
 
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("listName", listName);
-        model.addAttribute("listIsDisplay", listIsDisplay);
+        model.addAttribute("queryName", queryName);
+        model.addAttribute("queryIsDisplay", queryIsDisplay);
         return "brand/add";
     }
 
     @RequestMapping("/addSubmit.do")
-    public String addSubmit(String listName, Integer listIsDisplay, Integer pageNo, Integer pageSize,
+    public String addSubmit(String queryName, Integer queryIsDisplay, Integer pageNo, Integer pageSize,
                             String name,MultipartFile pic,String description,Integer sort,Short isDisplay,
-                            Model model){
+                            Model model,HttpServletRequest request){
         try {
-            String imgUrl = null;
-            String originalFilename = pic.getOriginalFilename();
-            if(!"".equals(originalFilename)){
-                imgUrl = uploadService.fastDFSUploadFile(pic.getBytes(), originalFilename);
-            }
+            String imgUrl = super.savePic(pic, request);
 
             // 保存品牌信息
             Brand brand = new Brand();
@@ -67,8 +67,8 @@ public class BrandController {
             // 页面重定向
             model.addAttribute("pageNo", pageNo);
             model.addAttribute("pageSize", pageSize);
-            model.addAttribute("name", listName);
-            model.addAttribute("isDisplay", listIsDisplay);
+            model.addAttribute("name", queryName);
+            model.addAttribute("isDisplay", queryIsDisplay);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,7 +76,8 @@ public class BrandController {
     }
 
     @RequestMapping("/list.do")
-    public String list(String name, Integer isDisplay, Integer pageNo, Integer pageSize, Model model,HttpServletRequest request){
+    public String list(String name, Integer isDisplay, Integer pageNo, Integer pageSize,
+                       Model model,HttpServletRequest request){
         try {
             if(pageNo == null){
                 pageNo = 1;
@@ -116,54 +117,38 @@ public class BrandController {
     }
 
     @RequestMapping("/edit.do")
-    public String edit(Integer brandId,String name,String isDisplay,Integer listPageNo,Integer listPageSize,
+    public String edit(Integer brandId,String queryName,String queryIsDisplay,
+                       Integer pageNo,Integer pageSize,
                        Model model,HttpServletRequest request){
-        if(listPageNo == null){
-            listPageNo = 1;
+        if(pageNo == null){
+            pageNo = 1;
         }
-        if(listPageSize == null){
-            listPageSize = MIN_PAGESIZE;
+        if(pageSize == null){
+            pageSize = MIN_PAGESIZE;
         }
-        if(name != null){
+        if(queryName != null){
             String method = request.getMethod();
             if("GET".equals(method)){
-                name = new String(name.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+                queryName = new String(queryName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
             }
         }
 
         Brand brand = brandService.selectBrandById(brandId+"");
 
-        model.addAttribute("name", name);
-        model.addAttribute("isDisplay", isDisplay);
-        model.addAttribute("listPageNo", listPageNo);
-        model.addAttribute("listPageSize", listPageSize);
+        model.addAttribute("queryName", queryName);
+        model.addAttribute("queryIsDisplay", queryIsDisplay);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("pageSize", pageSize);
         model.addAttribute("brand", brand);
         return "brand/edit";
     }
 
     @RequestMapping("/editSubmit.do")
     public String editSubmit(Long brandId, String name, String description, Integer sort, Short isDisplay,
-                           String pageNo,String pageSize,String listName,String listIsDisplay,
-                             MultipartFile pic, Model model){
+                           String pageNo,String pageSize,String queryName,String queryIsDisplay,
+                             MultipartFile pic, Model model,HttpServletRequest request){
         try {
-            String imgUrl = null;
-            String originalFilename = pic.getOriginalFilename();
-
-            // 图片保存到服务器
-//            if(!"".equals(originalFilename)){ // 上传文件不为空
-//                String realPath = request.getServletContext().getRealPath("");
-//                System.out.println("realPath:"+realPath);
-//                imgUrl  = "/upload/"+ System.currentTimeMillis() + "_" +
-//                        UUID.randomUUID().toString().replaceAll("-","")
-//                        + originalFilename.substring(originalFilename.lastIndexOf("."));
-//                String newFilePath = realPath + imgUrl;
-//                pic.transferTo(new File(newFilePath));
-//            }
-
-            // 图片上传到fastDFS
-            if(!"".equals(originalFilename)){
-                imgUrl = uploadService.fastDFSUploadFile(pic.getBytes(), originalFilename);
-            }
+            String imgUrl = super.savePic(pic, request);
 
             // 保存修改后的品牌信息
             Brand brand = new Brand();
@@ -177,8 +162,8 @@ public class BrandController {
 
             model.addAttribute("pageNo",pageNo);
             model.addAttribute("pageSize",pageSize);
-            model.addAttribute("name",listName);
-            model.addAttribute("isDisplay",listIsDisplay);
+            model.addAttribute("name",queryName);
+            model.addAttribute("isDisplay",queryIsDisplay);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,20 +171,21 @@ public class BrandController {
     }
 
     @RequestMapping("/delete.do")
-    public String delete(Integer brandId,Integer listPageNo,Integer listPageSize,String name,Short isDisplay,
+    public String delete(Integer brandId,String queryName,Short queryIsDisplay,
+                         Integer pageNo,Integer pageSize,
                          Model model,HttpServletRequest request){
-        if(name != null){
+        if(queryName != null){
             if("GET".equals(request.getMethod())){
-                name = new String(name.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+                queryName = new String(queryName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
             }
         }
 
-        model.addAttribute("name",name);
-        model.addAttribute("isDisplay",isDisplay);
-        model.addAttribute("pageNo",listPageNo);
-        model.addAttribute("pageSize",listPageSize);
+        model.addAttribute("name",queryName);
+        model.addAttribute("isDisplay",queryIsDisplay);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("pageSize",pageSize);
 
-        Boolean ret = brandService.deleteBrand(brandId);
+        brandService.deleteBrand(brandId);
         return "redirect:/brand/list.do";
     }
 

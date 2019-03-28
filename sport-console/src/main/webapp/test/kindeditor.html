@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kindeditor demo</title>
+</head>
+<body>
+<textarea id="textareaId" cols="160" rows="20"></textarea>
+<script type="text/javascript" src="/console/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" src="/console/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    // 编辑器参数
+    var kingEditorParams = {
+        //指定上传文件参数名称
+        filePostName  : "uploadFile",
+        //指定上传文件请求的url
+        uploadJson : '/console/upload/uploadFck.do',
+        //上传类型，分别为image、flash、media、file
+        dir : "image"
+    };
+    KindEditor.create('#textareaId',kingEditorParams);
+    KindEditor.sync();
+</script>
+</body>
+</html>

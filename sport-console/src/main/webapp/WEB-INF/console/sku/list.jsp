@@ -1,5 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../head.jsp" %>
+<%
+    String basePath = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -29,134 +32,57 @@
 		</tr>
 	</thead>
 	<tbody class="pn-ltbody">
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">西瓜红</td>
-				<td align="center">S</td>
-				<td align="center"><input type="text" id="m52" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p52" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i52" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l52" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f52" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(52)" class="pn-opt">修改</a> | <a href="javascript:addSku(52)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">西瓜红</td>
-				<td align="center">M</td>
-				<td align="center"><input type="text" id="m53" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p53" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i53" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l53" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f53" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(53)" class="pn-opt">修改</a> | <a href="javascript:addSku(53)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">西瓜红</td>
-				<td align="center">L</td>
-				<td align="center"><input type="text" id="m54" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p54" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i54" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l54" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f54" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(54)" class="pn-opt">修改</a> | <a href="javascript:addSku(54)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">西瓜红</td>
-				<td align="center">XL</td>
-				<td align="center"><input type="text" id="m55" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p55" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i55" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l55" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f55" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(55)" class="pn-opt">修改</a> | <a href="javascript:addSku(55)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">墨绿</td>
-				<td align="center">S</td>
-				<td align="center"><input type="text" id="m56" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p56" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i56" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l56" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f56" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(56)" class="pn-opt">修改</a> | <a href="javascript:addSku(56)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">墨绿</td>
-				<td align="center">M</td>
-				<td align="center"><input type="text" id="m57" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p57" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i57" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l57" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f57" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(57)" class="pn-opt">修改</a> | <a href="javascript:addSku(57)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">墨绿</td>
-				<td align="center">L</td>
-				<td align="center"><input type="text" id="m58" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p58" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i58" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l58" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f58" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(58)" class="pn-opt">修改</a> | <a href="javascript:addSku(58)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">墨绿</td>
-				<td align="center">XL</td>
-				<td align="center"><input type="text" id="m59" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p59" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i59" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l59" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f59" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(59)" class="pn-opt">修改</a> | <a href="javascript:addSku(59)" class="pn-opt">保存</a></td>
-			</tr>
-		
-			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-				<td><input type="checkbox" name="ids" value="73"/></td>
-				<td>20141028114308048</td>
-				<td align="center">浅粉</td>
-				<td align="center">S</td>
-				<td align="center"><input type="text" id="m60" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="p60" value="0.0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="i60" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="l60" value="0" disabled="disabled" size="10"/></td>
-				<td align="center"><input type="text" id="f60" value="10.0" disabled="disabled" size="10"/></td>
-				<td align="center">不是</td>
-				<td align="center"><a href="javascript:updateSku(60)" class="pn-opt">修改</a> | <a href="javascript:addSku(60)" class="pn-opt">保存</a></td>
-			</tr>
+			<c:forEach items="${skuList}" var="sku">
+				<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
+					<td><input type="checkbox" name="ids" value="${sku.id}"/></td>
+					<td>${sku.productId}</td>
+					<td align="center">${sku.color.name}</td>
+					<td align="center">${sku.size}</td>
+					<td align="center"><input type="text" id="m${sku.id}" value="${sku.marketPrice}" disabled="disabled" size="10"/></td>
+					<td align="center"><input type="text" id="p${sku.id}" value="${sku.price}" disabled="disabled" size="10"/></td>
+					<td align="center"><input type="text" id="i${sku.id}" value="${sku.stock}" disabled="disabled" size="10"/></td>
+					<td align="center"><input type="text" id="l${sku.id}" value="${sku.upperLimit}" disabled="disabled" size="10"/></td>
+					<td align="center"><input type="text" id="f${sku.id}" value="${sku.deliveFee}" disabled="disabled" size="10"/></td>
+					<td align="center">不是</td>
+					<td align="center"><a href="javascript:updateSku(${sku.id})" class="pn-opt">修改</a> | <a href="javascript:addSku(${sku.id})" class="pn-opt">保存</a></td>
+				</tr>
+			</c:forEach>
 	</tbody>
 </table>
 </form>
 </div>
+<script type="text/javascript">
+    function updateSku(skuId){
+        $("#m"+skuId).removeAttr("disabled");
+        $("#p"+skuId).removeAttr("disabled");
+        $("#i"+skuId).removeAttr("disabled");
+        $("#l"+skuId).removeAttr("disabled");
+        $("#f"+skuId).removeAttr("disabled");
+    }
+
+    function addSku(skuId){
+        $.post(
+            "<%=basePath%>/sku/update.do",
+            {
+                skuId: skuId,
+                marketPrice: $("#m"+skuId).val(),
+                price: $("#p"+skuId).val(),
+                stock: $("#i"+skuId).val(),
+                upperLimit: $("#l"+skuId).val(),
+                deliveFee: $("#f"+skuId).val()
+            },
+            function(ret){
+                console.log(ret);
+                if(ret == 1){
+                    $("#m"+skuId).attr("disabled","disabled");
+                    $("#p"+skuId).attr("disabled","disabled");
+                    $("#i"+skuId).attr("disabled","disabled");
+                    $("#l"+skuId).attr("disabled","disabled");
+                    $("#f"+skuId).attr("disabled","disabled");
+                }
+            }
+        )
+    }
+</script>
 </body>
 </html>

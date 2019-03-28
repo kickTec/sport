@@ -58,8 +58,8 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 品牌管理 - 列表</div>
 	<form class="ropt" action="<%=path%>/brand/add.do" method="post">
-        <input type="hidden" name="listName" value="${queryName}"/>
-        <input type="hidden" name="listIsDisplay" value="${queryIsDisplay}" />
+        <input type="hidden" name="queryName" value="${queryName}"/>
+        <input type="hidden" name="queryIsDisplay" value="${queryIsDisplay}" />
         <input type="hidden" name="pageNo" value="${pageNo}" />
         <input type="hidden" name="pageSize" value="${pageSize}" />
         <input type="submit" class="add" value="添加"/>
@@ -114,10 +114,10 @@
                 </td>
 				<td align="center">
 					<a class="pn-opt"
-                       href="<%=path%>/brand/edit.do?brandId=${brand.id }&listPageNo=${pageNo}&listPageSize=${pageSize}&name=${brand.name}&isDisplay=${brand.isDisplay}"
+                       href="<%=path%>/brand/edit.do?brandId=${brand.id }&pageNo=${pageNo}&pageSize=${pageSize}&queryName=${queryName}&queryIsDisplay=${queryIsDisplay}"
                     >修改</a>
                     |
-                    <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="<%=path%>/brand/delete.do?brandId=${brand.id }&listPageNo=${pageNo}&listPageSize=${pageSize}&name=${queryName}&isDisplay=${queryIsDisplay}">删除</a>
+                    <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="<%=path%>/brand/delete.do?brandId=${brand.id }&pageNo=${pageNo}&pageSize=${pageSize}&queryName=${queryName}&queryIsDisplay=${queryIsDisplay}">删除</a>
 				</td>
 			</tr>
 		</c:forEach>

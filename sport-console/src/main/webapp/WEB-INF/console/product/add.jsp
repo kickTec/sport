@@ -23,7 +23,7 @@
     font-size: 14px;
     font-weight: normal;
     border: 1px solid #C5C5C5;
-    background: url('/images/admin/bg_ch.gif') repeat-x scroll 0% 0% transparent;
+    background: url('<%=basePath%>/images/admin/bg_ch.gif') repeat-x scroll 0% 0% transparent;
 }
 a {
     color: #06C;
@@ -32,62 +32,69 @@ a {
 </style>
 <script type="text/javascript">
 $(function(){
-	var tObj;
-	$("#tabs a").each(function(){
-		if($(this).attr("class").indexOf("here") == 0){tObj = $(this)}
-		$(this).click(function(){
-			var c = $(this).attr("class");
-			if(c.indexOf("here") == 0){return;}
-			var ref = $(this).attr("ref");
-			var ref_t = tObj.attr("ref");
-			tObj.attr("class","nor");
-			$(this).attr("class","here");
-			$(ref_t).hide();
-			$(ref).show();
-			tObj = $(this);
-			if(ref == '#tab_3'){
-				// 编辑器参数
-		 		var kingEditorParams = {
-					//指定上传文件参数名称
-					filePostName  : "uploadFile",
-					//指定上传文件请求的url。
-					uploadJson : '/upload/uploadFck.do',
-					//上传类型，分别为image、flash、media、file
-					dir : "image"//,
-// 					width : '1000px',
-// 					height : '400px'
-				}; 
-				KindEditor.create('#productdesc',kingEditorParams);
-				KindEditor.sync();
-			}
-		});
-	});
+    // 页面上方选项卡点击切换
+    var selectedItem;
+    $('#tabs a').each(function(index,item){
+        // 获取初始化显示的A标签
+
+        var classAttr = $(item).attr('class');
+        if(classAttr === 'here'){
+            selectedItem = item;
+        };
+
+        // 每个A标签绑定点击事件
+        $(item).click(function(){
+            // 切换面板
+            var refAttr = $(item).attr('ref');
+            $('tbody').each(function(index,item){
+                var tbodyId = '#'+$(item).attr('id');
+                if(refAttr === tbodyId){
+                    $(item).show();
+                }else{
+                    if($(item).attr('id') !== ''){
+                        $(item).hide();
+                    }
+                }
+            });
+
+            // 切换标记
+            $(item).attr('class','here');
+            $(selectedItem).attr('class','nor');
+            selectedItem = item;
+
+            // 将productdesc文本域转换为kindeditor
+            if(refAttr == '#tab_3'){
+                // 编辑器参数
+                var kingEditorParams = {
+                    //指定上传文件参数名称
+                    filePostName  : "uploadFile",
+                    //指定上传文件请求的url
+                    uploadJson : '<%=basePath%>/upload/uploadFck.do',
+                    //上传类型，分别为image、flash、media、file
+                    dir : "image"
+                };
+                KindEditor.create('#productdesc',kingEditorParams);
+                KindEditor.sync();
+            }
+        });
+    });
 });
-//上传图片
+
 function uploadPic(){
-	//上传图片 异步的  	Jquery.form.js
-	var options = {
-			url : "/upload/uploadPics.do",
-			type : "post",
-			dataType : "json",
-			success : function(data){
-				//多图片回显
-				var html = '<tr>'
-						 + '<td width="20%" class="pn-flabel pn-flabel-h"></td>'
-						 + '<td width="80%" class="pn-fcontent">';
-				for(var i=0;i<data.length;i++){
-					html += '<img width="100" height="100" src="' + data[i] + '" />'
-					     +  '<input type="hidden" name="imgUrl" value="' + data[i] + '"/>'
-				}
-				html += '<a href="javascript:;" class="pn-opt" onclick="jQuery(this).parents(\'tr\').remove()">删除</a>'
-					 +  '</td>'
-					 +  '</tr>';
-				//回显
-				$("#tab_2").append(html);
-				
-			}
-	}
-	$("#jvForm").ajaxSubmit(options);
+    var uploadFile = document.getElementById("uploadPicId"); // 上传文件元素
+    if(uploadFile.files){ // 上传文件存在
+        // 遍历所有上传文件，并生成对应的img标签
+        var html = '<tr>';
+        for(var i=0;i<uploadFile.files.length;i++){
+            var picUrl = window.URL.createObjectURL(uploadFile.files[i]);
+            html += '<td><img height="150" width="200" style="block" src="';
+            html += picUrl;
+            html += '"/></td>';
+        }
+        html += '</tr>';
+        // 将所有img标签添加到容器中,用于展示
+        $("#tab_2").append(html);
+    }
 }
 </script>
 </head>
@@ -95,23 +102,30 @@ function uploadPic(){
 <div class="box-positon">
 	<div class="rpos">当前位置: 商品管理 - 添加</div>
 	<form class="ropt" action="<%=basePath%>/product/list.do">
-		<input type="hidden" name="productName" value="${listProductName}"/>
-		<input type="hidden" name="brandId" value="${listBrandId}"/>
-		<input type="hidden" name="isShow" value="${listIsShow}"/>
+		<input type="hidden" name="productName" value="${queryProductName}"/>
+		<input type="hidden" name="brandId" value="${queryBrandId}"/>
+		<input type="hidden" name="isShow" value="${queryIsShow}"/>
 		<input type="hidden" name="pageNo" value="${pageNo}"/>
 		<input type="hidden" name="pageSize" value="${pageSize}"/>
 		<input type="submit" value="返回列表" class="return-button"/>
 	</form>
 	<div class="clear"></div>
 </div>
-<h2 class="h2_ch"><span id="tabs">
-<a href="javascript:void(0);" ref="#tab_1" title="基本信息" class="here">基本信息</a>
-<a href="javascript:void(0);" ref="#tab_2" title="商品图片" class="nor">商品图片</a>
-<a href="javascript:void(0);" ref="#tab_3" title="商品描述" class="nor">商品描述</a>
-<a href="javascript:void(0);" ref="#tab_4" title="包装清单" class="nor">包装清单</a>
-</span></h2>
+<h2 class="h2_ch">
+    <span id="tabs">
+        <a href="javascript:void(0);" ref="#tab_1" title="基本信息" class="here">基本信息</a>
+        <a href="javascript:void(0);" ref="#tab_2" title="商品图片" class="nor">商品图片</a>
+        <a href="javascript:void(0);" ref="#tab_3" title="商品描述" class="nor">商品描述</a>
+        <a href="javascript:void(0);" ref="#tab_4" title="包装清单" class="nor">包装清单</a>
+    </span>
+</h2>
 <div class="body-box" style="float:right">
-	<form id="jvForm" action="add.do" method="post" enctype="multipart/form-data">
+	<form id="jvForm" action="<%=basePath%>/product/addSubmit.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="queryProductName" value="${queryProductName}"/>
+		<input type="hidden" name="queryBrandId" value="${queryBrandId}"/>
+		<input type="hidden" name="queryIsShow" value="${queryIsShow}"/>
+		<input type="hidden" name="pageNo" value="${pageNo}"/>
+		<input type="hidden" name="pageSize" value="${pageSize}"/>
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
 			<tbody id="tab_1">
 				<tr>
@@ -119,13 +133,13 @@ function uploadPic(){
 						<span class="pn-frequired">*</span>
 						商品类型:</td><td width="80%" class="pn-fcontent">
 								<select name="typeId">
-									<option value="">请选择</option>
-									<option value="2">瑜珈服</option>
-									<option value="3">瑜伽辅助</option>
-									<option value="4">瑜伽铺巾</option>
-									<option value="5">瑜伽垫</option>
-									<option value="6">舞蹈鞋服</option>
-									<option value="7">其它</option>
+                                    <option value="">请选择</option>
+                                    <option value="2">瑜珈服</option>
+                                    <option value="3">瑜伽辅助</option>
+                                    <option value="4">瑜伽铺巾</option>
+                                    <option value="5">瑜伽垫</option>
+                                    <option value="6">舞蹈鞋服</option>
+                                    <option value="7">其它</option>
 								</select>
 					</td>
 				</tr>
@@ -141,9 +155,9 @@ function uploadPic(){
 						商品品牌:</td><td width="80%" class="pn-fcontent">
 						<select name="brandId">
 							<option value="">请选择品牌</option>
-							<option value="1">依琦莲</option>
-							<option value="2">凯速（KANSOON）</option>
-							<option value="3">梵歌纳（vangona）</option>
+                            <c:forEach items="${brandList}" var="brand">
+                                <option value="${brand.id}">${brand.name}</option>
+                            </c:forEach>
 						</select>
 					</td>
 				</tr>
@@ -157,13 +171,9 @@ function uploadPic(){
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						颜色:</td><td width="80%" class="pn-fcontent">
-							<input type="checkbox" value="9" name="colors"/>西瓜红
-							<input type="checkbox" value="9" name="colors"/>西瓜红
-							<input type="checkbox" value="9" name="colors"/>西瓜红
-							<input type="checkbox" value="9" name="colors"/>西瓜红
-							<input type="checkbox" value="9" name="colors"/>西瓜红
-							<input type="checkbox" value="9" name="colors"/>西瓜红
-							<input type="checkbox" value="9" name="colors"/>西瓜红
+							<c:forEach items="${colorList}" var="color">
+                                <input type="checkbox" value="${color.id}" name="colors"/>${color.name}
+                            </c:forEach>
 					</td>
 				</tr>
 				<tr>
@@ -193,12 +203,12 @@ function uploadPic(){
 						上传商品图片(90x150尺寸):</td>
 						<td width="80%" class="pn-fcontent">
 						注:该尺寸图片必须为90x150。
-					</td>
 				</tr>
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h"></td>
+                    </td>
 						<td width="80%" class="pn-fcontent">
-						<input type="file" onchange="uploadPic()" name="pics" multiple="multiple"/>
+						<input id="uploadPicId" type="file" onchange="uploadPic()" name="pics" multiple="multiple"/>
 					</td>
 				</tr>
 			</tbody>

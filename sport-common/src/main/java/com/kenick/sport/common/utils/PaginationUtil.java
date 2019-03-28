@@ -1,8 +1,10 @@
-package com.kenick.sport;
-
+package com.kenick.sport.common.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  分页相关工具类
+ */
 public class PaginationUtil {
     private  Integer pageNo = 1; // 当前页
     private  Integer pageSize = 5; // 每页大小

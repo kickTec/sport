@@ -1,8 +1,9 @@
-package com.kenick.sport.serviceImpl.product;
+package com.kenick.sport.product.serviceImpl;
 
 import com.kenick.sport.mapper.product.BrandMapper;
 import com.kenick.sport.pojo.product.Brand;
 import com.kenick.sport.pojo.product.BrandQuery;
+import com.kenick.sport.product.utils.FastDFSUtil;
 import com.kenick.sport.service.product.BrandService;
 import org.springframework.stereotype.Service;
 
@@ -94,6 +95,15 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Boolean deleteBrand(Integer brandId) {
+        // 先删除服务器资源
+        Brand brand = brandMapper.queryBrandById(brandId+"");
+        String imgUrl = brand.getImgUrl();
+        if(imgUrl.contains("http")){ // fastDFS文件删除 由于分布式部署,本地文件需要在应用层删除
+            String fileID = FastDFSUtil.getFileIdFromUrl(imgUrl);
+            FastDFSUtil.deleteFastDFSFile(fileID);
+        }
+
+        // 删除数据库
         Integer integer = brandMapper.deleteBrandById(brandId);
         return integer>0;
     }

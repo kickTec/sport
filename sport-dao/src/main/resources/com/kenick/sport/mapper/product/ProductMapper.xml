@@ -130,7 +130,7 @@
       #{packageList,jdbcType=VARCHAR}, #{colors,jdbcType=VARCHAR}, #{sizes,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.kenick.sport.pojo.product.Product" >
+  <insert id="insertSelective" parameterType="com.kenick.sport.pojo.product.Product" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     insert into bbs_product
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

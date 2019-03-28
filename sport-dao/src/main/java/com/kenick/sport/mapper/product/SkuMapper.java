@@ -18,6 +18,8 @@ public interface SkuMapper {
 
     List<Sku> selectByExample(SkuQuery example);
 
+    List<Sku> selectSkuAndColorByProductId(Long productId);
+
     Sku selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Sku record, @Param("example") SkuQuery example);
