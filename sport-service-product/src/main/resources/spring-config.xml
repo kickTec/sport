@@ -26,4 +26,6 @@
 	<import resource="classpath:config/applicationContext-transaction.xml"/>
 	<import resource="classpath:config/dubbo-provider-dev.xml"/>
 	<import resource="classpath:config/redis.xml"/>
+	<import resource="classpath:config/solr.xml"/>
+	<import resource="classpath:config/activemq-provider.xml"/>
 </beans>

@@ -6,15 +6,21 @@ import com.kenick.sport.pojo.product.BrandQuery;
 import com.kenick.sport.product.utils.FastDFSUtil;
 import com.kenick.sport.service.product.BrandService;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service("brandService")
 public class BrandServiceImpl implements BrandService {
     @Resource
     private BrandMapper brandMapper;
+
+    @Resource
+    private Jedis jedis;
 
     @Override
     public List<Brand> selectBrandListByQueryNoPage(BrandQuery brandQuery) {
@@ -70,6 +76,27 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public List<Brand> selectBrandListFromRedis() {
+        List<Brand> brandList = new ArrayList<>();
+        Map<String, String> brandMap = jedis.hgetAll("brand");
+        Set<String> keySet = brandMap.keySet();
+        for(String brandId:keySet){
+            String brandName = brandMap.get(brandId);
+            Brand brand = new Brand();
+            brand.setId(Long.parseLong(brandId));
+            brand.setName(brandName);
+            brandList.add(brand);
+        }
+        return brandList;
+    }
+
+    @Override
+    public String selectBrandNameFromRedis(Long brandId) {
+        Map<String, String> brandMap = jedis.hgetAll("brand");
+        return brandMap.get(brandId+"");
+    }
+
+    @Override
     public Integer updateBrand(Brand brand) {
         if(brand.getId() == null){ // id不存在
             return -2;
@@ -84,11 +111,17 @@ public class BrandServiceImpl implements BrandService {
             return -1;
         }
 
+        // 品牌信息保存到redis中
+        jedis.hset("brand",String.valueOf(brand.getId()),brand.getName());
+
         return brandMapper.updateBrand(brand);
     }
 
     @Override
     public Boolean addBrand(Brand brand) {
+        // 品牌信息保存到jedis中
+        jedis.hset("brand",String.valueOf(brand.getId()),brand.getName());
+
         Integer lines = brandMapper.insertBrand(brand);
         return lines>0;
     }

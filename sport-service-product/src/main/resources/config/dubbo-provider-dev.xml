@@ -24,9 +24,6 @@
 	
 	<!-- 配置dubbo服务名：用于monitor监控 -->
 	<dubbo:application name="service-product"/>
-	
-	<!-- 配置dubbo的注册中心 -->
-	<!--<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>-->
 
     <!--dubbo直连-->
 	<dubbo:registry address="N/A" />

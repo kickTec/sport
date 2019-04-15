@@ -21,7 +21,6 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
 	<!-- dubbo服务消费方 -->
-	
 	<!-- 配置dubbo服务名：用于monitor监控 -->
 	<dubbo:application name="console"/>
 	
@@ -29,8 +28,11 @@
 	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>
 	
 	<!-- 配置引用注册中心的服务-->
-	<dubbo:reference id="testTbService" interface="com.kenick.sport.service.TestTbService" check="true"/>
+	<dubbo:reference id="brandService" interface="com.kenick.sport.service.product.BrandService" check="false"/>
+	<dubbo:reference id="uploadService" interface="com.kenick.sport.service.upload.UploadService" check="false"/>
+	<dubbo:reference id="productService" interface="com.kenick.sport.service.product.ProductService" check="false"/>
+	<dubbo:reference id="colorService" interface="com.kenick.sport.service.product.ColorService" check="false"/>
+	<dubbo:reference id="skuService" interface="com.kenick.sport.service.product.SkuService" check="false"/>
 
 	<dubbo:consumer timeout="600000"/>
-		
 </beans>

@@ -1,0 +1,57 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo        
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<!-- spring整合JMS 消费者 -->
+	
+	<!-- 配置JMS服务提供商  ActiveMQ -->
+	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- 连接ActiveMQ服务地址 -->
+		<property name="brokerURL" value="tcp://192.168.200.128:61616"/>
+		<property name="userName" value="admin"/>
+		<property name="password" value="admin"/>
+	</bean>
+	
+	<!-- 配置ActiveMQ的连接池工厂 -->
+	<bean id="pooledConnectionFactoryBean" class="org.apache.activemq.pool.PooledConnectionFactoryBean">
+		<property name="connectionFactory" ref="activeMQConnectionFactory"/>
+	</bean>
+	
+	<!-- spring管理JMS(ActiveMQ) -->
+	<bean id="singleConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactoryBean"/>
+	</bean>
+	
+	<!-- 自定义消息监听器,处理队列中的消息 -->
+    <bean id="customMessageListener" class="com.kenick.sport.cms.mq.CustomMessageListener" />
+
+	<bean id="defaultMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<!-- 注入连接工厂 -->
+		<property name="connectionFactory" ref="singleConnectionFactory"/>
+		<!-- 注入自定义监听器，处理队列中消息 -->
+		<property name="messageListener" ref="customMessageListener"/>
+		<!-- 指定队列名称 -->
+		<property name="destinationName" value="productIds"/>
+		<!--消息的订阅和发布-->
+		<property name="pubSubDomain" value="true" />
+	</bean>
+		
+</beans>

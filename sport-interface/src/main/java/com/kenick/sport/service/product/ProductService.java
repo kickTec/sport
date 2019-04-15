@@ -30,12 +30,26 @@ public interface ProductService {
      * @param product 商品信息
      * @return 受影响的行
      */
-    Integer saveProduct(Product product);
+    Integer saveProduct(Product product) throws Exception;
 
     /**
      *  通过id删除商品信息
      * @param productId 商品id
      * @return 受影响的行
      */
-    Integer deleteProductById(Long productId);
+    Integer deleteProductById(Long productId) throws Exception;
+
+    /**
+     * 商品上架
+     * @param ids 商品id数组
+     * @return 0:上架成功
+     */
+    void isShow(String[] ids) throws Exception;
+
+    /**
+     * 根据商品id获取商品信息
+     * @param productId 商品id
+     * @return 商品信息
+     */
+    Product selectProductById(Long productId);
 }

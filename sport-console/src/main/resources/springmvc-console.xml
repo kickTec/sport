@@ -23,13 +23,13 @@
 	<!-- springmvc的核心配置文件-->
 	
 	<!-- 扫描Controller -->
-	<context:component-scan base-package="com.kenick.sport.controller"/>
+	<context:component-scan base-package="com.kenick.sport.console.controller"/>
 
 	<!--加载自定义类型转换器-->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
-				<bean class="com.kenick.sport.converter.CustomParamConverter" />
+				<bean class="com.kenick.sport.common.converter.CustomParamConverter" />
 			</set>
 		</property>
 	</bean>
@@ -42,13 +42,13 @@
 		<property name="prefix" value="/WEB-INF/console/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
-	
-	<!-- 加载dubbo的服务消费方法配置文件 -->
-	<import resource="classpath:dubbo-consumer-dev.xml"/>
 
 	<!-- spring mvc 文件上传支持 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8"/>
 		<property name="maxUploadSize" value="10485760"/>
 	</bean>
+
+	<!-- 加载dubbo的服务消费方法配置文件 -->
+	<import resource="classpath:dubbo-consumer-dev.xml"/>
 </beans>

@@ -26,4 +26,11 @@ public interface SkuService {
      * @return 库存信息
      */
     List<Sku> selectSkuAndColorByProductId(Long productId);
+
+    /**
+     *  通过产品ID获取最低价
+     * @param productId
+     * @return
+     */
+    Float selectLowestPriceByProductId(Long productId);
 }

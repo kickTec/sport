@@ -41,6 +41,18 @@ public interface BrandService {
     Brand selectBrandById(String brandId);
 
     /**
+     *  从redis中查询品牌列表
+     * @return 品牌列表
+     */
+    List<Brand> selectBrandListFromRedis();
+
+    /**
+     *  从redis中根据brandId查询品牌名称
+     * @return 品牌名称
+     */
+    String selectBrandNameFromRedis(Long brandId);
+
+    /**
      * 修改品牌信息
      * @param brand 新对象
      * @return 修改结果

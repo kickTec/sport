@@ -21,7 +21,6 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
 	<!-- dubbo服务提供方 -->
-	
 	<!-- 配置dubbo服务名：用于monitor监控 -->
 	<dubbo:application name="service-product"/>
 	
@@ -32,7 +31,14 @@
 	<dubbo:protocol name="dubbo" port="20880"/>
 	
 	<!-- 将接口暴露到注册中心  ref引用具体的实现类-->
-	<dubbo:service ref="testTbService" interface="com.kenick.sport.service.TestTbService" class="com.kenick.sport.serviceImpl.TestTbServiceImpl"/>
-	<dubbo:service ref="brandService" interface="com.kenick.sport.service.BrandService" class="com.kenick.sport.serviceImpl.BrandServiceImpl"/>
-
+	<dubbo:service ref="brandService" interface="com.kenick.sport.service.product.BrandService"
+				   class="com.kenick.sport.product.serviceImpl.BrandServiceImpl"/>
+	<dubbo:service ref="uploadService" interface="com.kenick.sport.service.upload.UploadService"
+				   class="com.kenick.sport.product.serviceImpl.UploadServiceImpl"/>
+	<dubbo:service ref="productService" interface="com.kenick.sport.service.product.ProductService"
+				   class="com.kenick.sport.product.serviceImpl.ProductServiceImpl"/>
+	<dubbo:service ref="colorService" interface="com.kenick.sport.service.product.ColorService"
+				   class="com.kenick.sport.product.serviceImpl.ColorServiceImpl"/>
+	<dubbo:service ref="skuService" interface="com.kenick.sport.service.product.SkuService"
+				   class="com.kenick.sport.product.serviceImpl.SkuServiceImpl"/>
 </beans>

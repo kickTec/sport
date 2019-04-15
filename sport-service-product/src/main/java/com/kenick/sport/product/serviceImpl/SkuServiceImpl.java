@@ -30,4 +30,20 @@ public class SkuServiceImpl implements SkuService {
     public List<Sku> selectSkuAndColorByProductId(Long productId) {
         return skuMapper.selectSkuAndColorByProductId(productId);
     }
+
+    @Override
+    public Float selectLowestPriceByProductId(Long productId) {
+        Float price = 0.0f;
+        SkuQuery skuQuery = new SkuQuery();
+        skuQuery.createCriteria().andProductIdEqualTo(productId);
+        skuQuery.setFields("price");
+        skuQuery.setOrderByClause("price asc");
+        skuQuery.setPageNo(1);
+        skuQuery.setPageSize(1);
+        List<Sku> skus = skuMapper.selectByExample(skuQuery);
+        if(skus.size() > 0){
+            price = skus.get(0).getPrice();
+        }
+        return price;
+    }
 }

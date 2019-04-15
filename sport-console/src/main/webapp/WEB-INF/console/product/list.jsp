@@ -22,7 +22,7 @@ function isShow(){
 		return;
 	}
 	//提交 Form表单
-	$("#jvForm").attr("action","/brand/isShow.do");
+	$("#jvForm").attr("action","<%=basePath%>/product/isShow.do");
 	$("#jvForm").attr("method","post");
 	$("#jvForm").submit();
 	

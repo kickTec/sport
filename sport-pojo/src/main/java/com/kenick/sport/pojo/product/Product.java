@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Product implements Serializable {
+    private String price; // 商品价格，主要用于solr查询
+
     /**
      * ID或商品编号
      */
@@ -48,6 +50,8 @@ public class Product implements Serializable {
      * 商品图片集
      */
     private String imgUrl;
+
+    private String[] images;
 
     /**
      * 是否删除:0删除,1,没删除
@@ -201,29 +205,41 @@ public class Product implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String[] getImages(){
+        String[] imgArray = new String[]{""};
+        if(imgUrl != null && !"".equals(imgUrl)){
+            imgArray = imgUrl.split(",");
+        }
+        return imgArray;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", brandId=").append(brandId);
-        sb.append(", name=").append(name);
-        sb.append(", weight=").append(weight);
-        sb.append(", isNew=").append(isNew);
-        sb.append(", isHot=").append(isHot);
-        sb.append(", isCommend=").append(isCommend);
-        sb.append(", isShow=").append(isShow);
-        sb.append(", imgUrl=").append(imgUrl);
-        sb.append(", isDel=").append(isDel);
-        sb.append(", description=").append(description);
-        sb.append(", packageList=").append(packageList);
-        sb.append(", colors=").append(colors);
-        sb.append(", sizes=").append(sizes);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Product{" +
+                "price='" + price + '\'' +
+                ", id=" + id +
+                ", brandId=" + brandId +
+                ", name='" + name + '\'' +
+                ", weight=" + weight +
+                ", isNew=" + isNew +
+                ", isHot=" + isHot +
+                ", isCommend=" + isCommend +
+                ", isShow=" + isShow +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", isDel=" + isDel +
+                ", description='" + description + '\'' +
+                ", packageList='" + packageList + '\'' +
+                ", colors='" + colors + '\'' +
+                ", sizes='" + sizes + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }

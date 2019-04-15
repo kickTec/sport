@@ -22,8 +22,6 @@
 	
 	<!-- 扫描service，并由spring的bean容器管理 -->
 	<context:component-scan base-package="com.kenick.sport.service"/>
-	<context:component-scan base-package="com.kenick.sport.serviceImpl"/>
 	<context:component-scan base-package="com.kenick.sport.product.serviceImpl"/>
-	
-		
+
 </beans>

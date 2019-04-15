@@ -8,16 +8,24 @@ import com.kenick.sport.pojo.product.Sku;
 import com.kenick.sport.pojo.product.SkuQuery;
 import com.kenick.sport.product.utils.FastDFSUtil;
 import com.kenick.sport.service.product.ProductService;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 import java.util.Date;
 import java.util.List;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
+    @Resource
+    private JmsTemplate jmsTemplate;
+
     @Resource
     private ProductMapper productMapper;
 
@@ -125,5 +133,30 @@ public class ProductServiceImpl implements ProductService {
             skuMapper.deleteByExample(skuQuery);
         }
         return productMapper.deleteByPrimaryKey(productId);
+    }
+
+    @Override
+    public void isShow(String[] ids) throws Exception{
+        Product productShow = new Product();
+        productShow.setIsShow(true);
+
+        for(final String id:ids){
+            // 修改商品isShow的状态
+            productShow.setId(Long.parseLong(id));
+            productMapper.updateByPrimaryKeySelective(productShow);
+
+            jmsTemplate.send(new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    TextMessage textMessage = session.createTextMessage(String.valueOf(id));
+                    return textMessage;
+                }
+            });
+        }
+    }
+
+    @Override
+    public Product selectProductById(Long productId) {
+        return productMapper.selectByPrimaryKey(productId);
     }
 }

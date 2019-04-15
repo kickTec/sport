@@ -21,12 +21,8 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
 	<!-- dubbo服务消费方 -->
-	
 	<!-- 配置dubbo服务名：用于monitor监控 -->
 	<dubbo:application name="console"/>
-	
-	<!-- 配置dubbo的注册中心 -->
-<!--	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>-->
 	
 	<!-- 配置引用注册中心的服务-->
 	<dubbo:reference id="brandService" interface="com.kenick.sport.service.product.BrandService" url="dubbo://127.0.0.1:20880" check="false"/>

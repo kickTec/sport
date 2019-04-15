@@ -1,6 +1,7 @@
 package com.kenick.sport.pojo.product;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Color implements Serializable {
     /**
@@ -55,6 +56,19 @@ public class Color implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl == null ? null : imgUrl.trim();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Color color = (Color) o;
+        return Objects.equals(id, color.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
