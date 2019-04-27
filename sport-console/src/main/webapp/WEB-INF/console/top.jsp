@@ -85,7 +85,7 @@ function HoverLi(id){
                                     	<li class="current" id="tb_11" onclick="HoverLi(11);"><a href="<%=basePath%>/center/main.do" target="mainFrame">首页</a></li>
 										<li class="sep"></li><li class="normal" id="tb_12" onclick="HoverLi(12);"><a href="<%=path%>/frame/product_main.do" target="mainFrame">商品</a></li>
 										<li class="sep"></li><li class="normal" id="tb_13" onclick="HoverLi(13);"><a href="frame/order_main.jsp" target="mainFrame">订单</a></li>
-										<li class="sep"></li><li class="normal" id="tb_14" onclick="HoverLi(14);"><a href="frame/ad_main.jsp" target="mainFrame">广告</a></li>
+										<li class="sep"></li><li class="normal" id="tb_14" onclick="HoverLi(14);"><a href="<%=path%>/frame/ad_main.do" target="mainFrame">广告</a></li>
 										<li class="sep"></li><li class="normal" id="tb_15" onclick="HoverLi(15);"><a href="frame/product_main.jsp" target="mainFrame">支付</a></li>
 										<li class="sep"></li><li class="normal" id="tb_16" onclick="HoverLi(16);"><a href="frame/product_main.jsp" target="mainFrame">资源</a></li>
 										<li class="sep"></li><li class="normal" id="tb_17" onclick="HoverLi(17);"><a href="frame/product_main.jsp" target="mainFrame">辅助</a></li>

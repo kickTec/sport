@@ -38,7 +38,7 @@
     if ( !cfg.DATA_MSlide ) {
         cfg.DATA_MSlide=[];
     }
-	var data = [
+/*	var data = [
 					{
 						"height":399,
 						"title":"",
@@ -81,8 +81,8 @@
 						"src":"/images/565c189bNf9721325.jpg",
 						"href":"javascript:;"
 					}
-				];
-	//var data = ${ads};
+				];*/
+	var data = ${adJson};
 
     cfg.DATA_MSlide = data;
     // 初始化一个广告信息

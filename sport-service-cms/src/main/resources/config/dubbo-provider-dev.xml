@@ -21,7 +21,6 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
 	<!-- dubbo服务提供方 -->
-	
 	<!-- 配置dubbo服务名：用于monitor监控 -->
 	<dubbo:application name="service-cms"/>
 
@@ -34,4 +33,8 @@
 	<!-- 将接口暴露到注册中心  ref引用具体的实现类-->
     <dubbo:service ref="cmsService" interface="com.kenick.sport.service.CmsService"
 				   class="com.kenick.sport.cms.serviceImpl.CmsServiceImpl"/>
+	<dubbo:service ref="adService" interface="com.kenick.sport.service.product.AdService"
+				   class="com.kenick.sport.cms.serviceImpl.AdServiceImpl"/>
+	<dubbo:service ref="positionService" interface="com.kenick.sport.service.product.PositionService"
+				   class="com.kenick.sport.cms.serviceImpl.PositionServiceImpl"/>
 </beans>

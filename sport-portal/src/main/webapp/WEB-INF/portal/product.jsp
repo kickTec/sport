@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    String path = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -31,6 +39,71 @@ window.pageConfig = {
 		HM : '0'
 	}
 };
+</script>
+<script type="text/javascript">
+	var cId;
+	var skuId;
+	// 页面初始化
+	$(function(){
+		// 选择第一个颜色
+		$("#colors div:first").trigger("click");
+	});
+
+	// 选择颜色操作
+	function colorToRed(target, colorId){
+		cId = colorId;
+		// 1、切换颜色时，需要清空之前的颜色信息
+		$("#colors div").removeClass("selected");
+		// 2、选择完颜色后，该框变红
+		$(target).addClass("selected");
+		// 定义一个开关
+		var flag = true;
+		// 3、确定完颜色后，需要加载该颜色下对应的尺码
+		var html = '';
+		<c:forEach items="${skus }" var="sku">
+			if(colorId == '${sku.colorId}'){
+				if(flag){
+					html += '<div class="item selected" id="${sku.size}" onclick="sizeToRed(this,\'${sku.size}\')">'+
+							'<b></b><a href="javascript:;" title="${sku.size}" >${sku.size}</a>' +
+							'</div>'
+					flag = false; // 第一次操作完成后，关闭开关。
+					$("#bbs-price").html('${sku.price}');
+					skuId = '${sku.id}';
+				}else{
+					html += '<div class="item" id="${sku.size}" onclick="sizeToRed(this,\'${sku.size}\')">'+
+					'<b></b><a href="javascript:;" title="${sku.size}" >${sku.size}</a>' +
+					'</div>'
+				}
+				
+			}
+		</c:forEach>
+		// 4、品级HTML
+		$("#sizes").html(html);
+	}
+	
+	// 选择尺码
+	function sizeToRed(target, size){
+		// 2、切换尺码时，清空之前的颜色
+		$("#sizes div").removeClass("selected")
+		// 1、选择尺码后，该框变红
+		$(target).addClass("selected");
+		// 3、确定尺码后就确定了条sku，就确定了价格  
+		<c:forEach items="${skus }" var="sku">
+			if(cId == '${sku.colorId}' && size == '${sku.size}'){ 
+				// 确定了一条sku，填充价格
+				$("#bbs-price").html('${sku.price}');
+				
+				skuId = '${sku.id}';
+			}
+		</c:forEach>
+	}
+	
+	// 加入购物车
+	function addCart(){
+		var amount = $("#buy-num").val(); // 获取购买数量
+		window.location.href = "/shopping/buyerCart?skuId="+skuId+"&amount="+amount;
+	}
+
 </script>
 </head>
 <body>
@@ -124,20 +197,21 @@ window.pageConfig = {
 			<div id="choose-color" class="li choose-color-shouji p-choose">
 				<div class="dt">选择颜色：</div>
 				<div class="dd" id="colors">
-                    <#list colors as color>
-                        <div class="item" onclick="colorToRed(this,'${color.id}')">
-                            <b></b>
-                            <a href="javascript:;" title="${color.name }" >
-                                <img data-img="1" src="/images/53f44cc2N0b714cb2_002.jpg" alt="灰色三件套" height="25" width="25">
-                                <i>${color.name }</i>
-                            </a>
-                        </div>
-                    </#list>
+				  <c:forEach items="${colors }" var="color">
+					<div class="item" onclick="colorToRed(this,'${color.id}')">
+						<b></b>
+						<a href="javascript:;" title="${color.name }" >
+						<img data-img="1"
+							src="/images/53f44cc2N0b714cb2_002.jpg"
+							alt="灰色三件套" height="25" width="25"><i>${color.name }</i></a>
+					</div>
+				  </c:forEach>
 				</div>
 			</div>
 			<div id="choose-version" class="li p-choose">
 				<div class="dt">选择尺码：</div>
 				<div class="dd" id="sizes">
+					
 				</div>
 			</div>
 				<!--brand-bar-->
@@ -182,12 +256,10 @@ window.pageConfig = {
 							<c:forEach items="${product.images}" var="pic" varStatus="status">
 								<c:choose>
 									<c:when test="${status.index == 0 }">
-										<li><img data-img="1" class="img-hover"
-											alt="${product.name}" src="${pic}" width="50" height="50"></li>
+										<li><img data-img="1" class="img-hover" alt="${product.name}" src="<%=path%>${pic}" width="50" height="50"></li>
 									</c:when>
 									<c:otherwise>
-										<li><img data-img="1" alt="${product.name}" src="${pic}"
-											width="50" height="50" ></li>
+										<li><img data-img="1" alt="${product.name}" src="<%=path%>${pic}" width="50" height="50" ></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -345,62 +417,8 @@ window.pageConfig = {
 	<!-- footer start -->
 	<jsp:include page="commons/footer.jsp" />
 	<!-- footer end -->
-	<script type="text/javascript" src="/js/lib-v1.js"></script>
-	<script type="text/javascript" src="/js/product.js"></script>
-	<script type="text/javascript" src="/js/iplocation_server.js"></script>
-    <script type="text/javascript">
-        var cId;
-
-        // 选择颜色
-        function colorToRed(target, colorId){
-            cId = colorId;
-
-            // 去掉其它选中项
-            $("#colors div").removeClass("selected");
-
-            // 选中该项
-            $(target).addClass("selected");
-
-            var flag = true;
-            // 加载该颜色下对应的尺码
-            var html = '';
-            <#list skus as sku>
-                if(colorId == '${sku.colorId}'){
-                    if(flag){
-                        html += '<div class="item selected" id="${sku.size}" onclick="sizeToRed(this,\'${sku.size}\')">'+
-                            '<b></b><a href="javascript:;" title="${sku.size}" >${sku.size}</a>' +
-                            '</div>';
-                        flag = false; // 第一次操作完成后，关闭开关。
-                        $("#bbs-price").html('${sku.price}');
-                    }else{
-                        html += '<div class="item" id="${sku.size}" onclick="sizeToRed(this,\'${sku.size}\')">'+
-                            '<b></b><a href="javascript:;" title="${sku.size}" >${sku.size}</a>' +
-                            '</div>';
-                    }
-                }
-            </#list>
-            $("#sizes").html(html);
-        }
-
-        // 选择尺码
-        function sizeToRed(target, size){
-            // 2、切换尺码时，清空之前的颜色
-            $("#sizes div").removeClass("selected")
-            // 1、选择尺码后，该框变红
-            $(target).addClass("selected");
-            // 3、确定尺码后就确定了条sku，就确定了价格
-            <#list skus as sku>
-                if(cId == '${sku.colorId}' && size == '${sku.size}'){
-                    // 确定了一条sku，填充价格
-                    $("#bbs-price").html('${sku.price}');
-                }
-            </#list>
-        }
-
-        // 页面初始化选择第一个颜色
-        $(function(){
-            $("#colors div:first").trigger("click");
-        });
-    </script>
+	<script type="text/javascript" src="<%=path%>/js/lib-v1.js"></script>
+	<script type="text/javascript" src="<%=path%>/js/product.js"></script>
+	<script type="text/javascript" src="<%=path%>/js/iplocation_server.js"></script>
 </body>
 </html>

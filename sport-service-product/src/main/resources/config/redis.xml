@@ -23,7 +23,7 @@
 	<!-- 通过spring管理jedis -->
 	<!-- Jedis jedis = new Jedis(host, port) -->
 	<bean id="jedis" class="redis.clients.jedis.Jedis">
-		<constructor-arg name="host" value="192.168.200.128"/>
+		<constructor-arg name="host" value="192.168.200.140"/>
 		<constructor-arg name="port" value="6379"/>
 	</bean>
 		

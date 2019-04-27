@@ -9,10 +9,10 @@
 		<ul class="fr lh">
 			<li class="fore1" id="loginbar" clstag="homepage|keycount|home2013|01b">
 				您好！欢迎来到新巴巴运动网！
-				<a href="javascript:;" onclick="login()">[登录]</a>&nbsp;
-				<a href="javascript:;" onclick="regist()">[免费注册]</a>
-				<a href="javascript:;" onclick="logout()">[退出]</a>
-				<a href="javascript:;" onclick="myOrder()" >我的订单</a>
+				<a id="login" href="javascript:;" onclick="login()">[登录]</a>&nbsp;
+				<a id="regist" href="javascript:;" onclick="regist()">[免费注册]</a>
+				<a id="logout" href="javascript:;" onclick="logout()">[退出]</a>
+				<a id="myOrder" href="javascript:;" onclick="myOrder()" >我的订单</a>
 			</li>
 			<li class="fore2-1 ld" id="jd-vip">
 				<s></s>
@@ -78,3 +78,24 @@
 		<span class="clr"></span>
 	</div>
 </div>
+<script type="text/javascript">
+	function login(){
+	    window.location.href = "http://localhost:8080/login/login.aspx?returnUrl="+encodeURIComponent(window.location.href);
+	}
+	$(function(){
+        $.ajax({
+            url:"http://localhost:8080/login/isLogin.aspx",
+            type:"post",
+            dataType:"jsonp",
+            success:function (data) {
+                if(data == 1){ // 已登录
+                    $("#login").hide();
+                    $("#regist").hide();
+                }else{ // 未登录
+                    $("#logout").hide();
+                    $("#myOrder").hide();
+                }
+            }
+        });
+    });
+</script>

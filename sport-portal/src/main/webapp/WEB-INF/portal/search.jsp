@@ -3,13 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    String path = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>商品搜索 - 新巴巴运动商城</title>
-<link rel="stylesheet" type="text/css" href="/css/base.css" media="all" />
-<link type="text/css" rel="stylesheet" href="/css/search.css">
-<script type="text/javascript" src="/js/jquery-1.6.4.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path%>/css/base.css" media="all" />
+<link type="text/css" rel="stylesheet" href="<%=path%>/css/search.css">
+<script type="text/javascript" src="<%=path%>/js/jquery-1.6.4.js"></script>
 </head>
 <body>
 <!-- header start -->
@@ -238,7 +241,8 @@
 		<li data-sku="1711416562" class="gl-item">
 			<div class="gl-i-wrap">
 				<div class="p-img">
-					<a href="javascript:;" onclick="window.open('/product/detail?id=${product.id}')" style="position: relative;">
+					<%--<a href="javascript:;" onclick="window.open('http://localhost:8080/freeMarker/html/product/${product.id}.html')" style="position: relative;">--%>
+                    <a href="javascript:;" onclick="window.open('<%=path%>/product/detail?id=${product.id}')" style="position: relative;">
 						<img width="220" height="220" class="err-product"  src="${product.images[0]}">
 						<div id="gwd_float_curve_trigger" class="gwd_float_curve_trigger gwd_float_curve_up" style="left: 70px; top: 180px;">
 							<div class="gwd_float_curve_wrapper">

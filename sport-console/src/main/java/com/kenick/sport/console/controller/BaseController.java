@@ -27,7 +27,7 @@ public class BaseController {
         String originalFilename = pic.getOriginalFilename();
         // 图片保存到服务器
         if (!"".equals(originalFilename)) { // 上传文件不为空
-            if (uploadService.fastDFSIsConn()) { // 分布式文件系统正常
+            if (uploadService !=null && uploadService.fastDFSIsConn()) { // 分布式文件系统正常
                 imgUrl = uploadService.fastDFSUploadFile(pic.getBytes(), originalFilename);
             } else {
                 String realPath = request.getSession().getServletContext().getRealPath("/");

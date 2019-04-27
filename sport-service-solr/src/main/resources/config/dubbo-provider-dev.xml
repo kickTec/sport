@@ -37,7 +37,6 @@
 	<!-- 将接口暴露到注册中心  ref引用具体的实现类-->
 	<dubbo:service ref="solrService" interface="com.kenick.sport.service.product.SolrService"
 				   class="com.kenick.sport.solr.serviceImpl.SolrServiceImpl"/>
-
 	<dubbo:reference id="skuService" interface="com.kenick.sport.service.product.SkuService" url="dubbo://127.0.0.1:20880" check="false"/>
     <dubbo:reference id="productService" interface="com.kenick.sport.service.product.ProductService" url="dubbo://127.0.0.1:20880" check="false"/>
 </beans>

@@ -1,5 +1,7 @@
 package com.kenick.sport.pojo.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -61,6 +63,7 @@ public class Product implements Serializable {
     /**
      * 商品描述
      */
+    @JsonIgnore
     private String description;
 
     /**
@@ -211,6 +214,10 @@ public class Product implements Serializable {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public void setImages(String[] imgArray){
+        this.images = imgArray;
     }
 
     public String[] getImages(){

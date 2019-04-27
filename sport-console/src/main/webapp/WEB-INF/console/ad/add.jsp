@@ -1,28 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../head.jsp" %>
+<%
+    String path = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>babasport-position-add</title>
-<script type="text/javascript">
-//上传图片
-function uploadPic(){
-	//jquery.js   jquery.form.js
-	var options  = {
-			url : "/upload/uploadPic.do",
-			type : "post",
-			dataType : "json",
-			success : function(data){
-				//回显
-				$("#allUrl").attr("src",data.path);
-				//赋值给隐藏域
-				$("#imgUrl").val(data.path);
-			}
-			
-	};
-	$("#jvForm").ajaxSubmit(options);
-}
-</script>
+<title>sport-position-add</title>
 </head>
 <body>
 <div class="box-positon">
@@ -33,15 +17,16 @@ function uploadPic(){
 	<div class="clear"></div>
 </div>
 <div class="body-box" style="float:right">
-	<form id="jvForm" action="add.do" method="post">
+	<form id="jvForm" action="<%=path%>/ad/addSubmit.do" method="post" enctype="multipart/form-data">
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
 			<tbody>
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
-						<span class="pn-frequired">*</span>
-						广告位置:</td><td width="80%" class="pn-fcontent">
-						<input type="hidden" value="" name="positionId"/>
-						大广告
+						<span class="pn-frequired">*</span>广告位置:
+                    </td>
+                    <td width="80%" class="pn-fcontent">
+						<input type="hidden" name="positionId" value="${position.id}"/>
+                        ${position.name}
 					</td>
 				</tr>
 				<tr>
@@ -73,9 +58,8 @@ function uploadPic(){
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h"></td>
 						<td width="80%" class="pn-fcontent">
-						<img width="489" height="303" id="allUrl" src="/images/57cd0006Na82dfc0d.jpg"/>
-						<input type="hidden" name="picture" id="imgUrl" value="/images/57cd0006Na82dfc0d.jpg"/>
-						<input type="file" name="pic" onchange="uploadPic()"/>
+						<img width="489" height="303" id="allUrl" src="<%=path%>/images/57cd0006Na82dfc0d.jpg"/>
+						<input id="uploadFileId" type="file" name="pic" onchange="previewPic()"/>
 					</td>
 				</tr>
 				<tr>
@@ -107,5 +91,16 @@ function uploadPic(){
 		</table>
 	</form>
 </div>
+<script type="text/javascript">
+    function previewPic(){
+        var uploadFile = document.getElementById("uploadFileId");
+        var previewImg = document.getElementById("allUrl");
+        // 设置预览
+        if(uploadFile.files && uploadFile.files[0]){
+            previewImg.style.display = "block";
+            previewImg.src = window.URL.createObjectURL(uploadFile.files[0]);
+        }
+    }
+</script>
 </body>
 </html>

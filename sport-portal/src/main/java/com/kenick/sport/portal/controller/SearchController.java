@@ -7,7 +7,6 @@ import com.kenick.sport.pojo.product.Product;
 import com.kenick.sport.pojo.product.Sku;
 import com.kenick.sport.service.CmsService;
 import com.kenick.sport.service.product.BrandService;
-import com.kenick.sport.service.product.ProductService;
 import com.kenick.sport.service.product.SolrService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +22,6 @@ public class SearchController {
 
     @Resource
     private SolrService solrService;
-
-    @Resource
-    private ProductService productService;
 
     @Resource
     private CmsService cmsService;

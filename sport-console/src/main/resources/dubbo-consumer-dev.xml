@@ -30,6 +30,8 @@
 	<dubbo:reference id="productService" interface="com.kenick.sport.service.product.ProductService" url="dubbo://127.0.0.1:20880" check="false"/>
 	<dubbo:reference id="colorService" interface="com.kenick.sport.service.product.ColorService" url="dubbo://127.0.0.1:20880" check="false"/>
     <dubbo:reference id="skuService" interface="com.kenick.sport.service.product.SkuService" url="dubbo://127.0.0.1:20880" check="false"/>
+	<dubbo:reference id="adService" interface="com.kenick.sport.service.product.AdService" url="dubbo://127.0.0.1:20882" check="false"/>
+	<dubbo:reference id="positionService" interface="com.kenick.sport.service.product.PositionService" url="dubbo://127.0.0.1:20882" check="false"/>
 
 	<dubbo:consumer timeout="600000"/>
 </beans>

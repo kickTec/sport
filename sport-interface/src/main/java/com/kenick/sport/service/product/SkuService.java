@@ -33,4 +33,11 @@ public interface SkuService {
      * @return
      */
     Float selectLowestPriceByProductId(Long productId);
+
+    /**
+     *  通过sku id获取sku
+     * @param skuId sku主键
+     * @return sku实体类
+     */
+    Sku selectSkuBySkuId(Long skuId);
 }

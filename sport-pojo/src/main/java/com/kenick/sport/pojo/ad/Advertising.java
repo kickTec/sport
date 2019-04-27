@@ -1,5 +1,7 @@
 package com.kenick.sport.pojo.ad;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 public class Advertising implements Serializable {
@@ -13,6 +15,8 @@ public class Advertising implements Serializable {
      */
     private Long positionId;
 
+    private Position position;
+
     /**
      * 广告标题
      */
@@ -21,11 +25,13 @@ public class Advertising implements Serializable {
     /**
      * 点击图片时触发的链接
      */
+    @JsonProperty("href")
     private String url;
 
     /**
      * 图片绝对路径
      */
+    @JsonProperty("src")
     private String picture;
 
     /**
@@ -94,6 +100,14 @@ public class Advertising implements Serializable {
 
     public void setWidth(Integer width) {
         this.width = width;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     @Override

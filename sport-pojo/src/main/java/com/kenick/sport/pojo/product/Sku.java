@@ -14,12 +14,14 @@ public class Sku implements Serializable {
      */
     private Long productId;
 
+    private Product product; // 用于页面回显
+
     /**
      * 颜色ID
      */
     private Long colorId;
 
-    private Color color;
+    private Color color; // 用于页面回显
 
     /**
      * 尺码
@@ -141,6 +143,14 @@ public class Sku implements Serializable {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

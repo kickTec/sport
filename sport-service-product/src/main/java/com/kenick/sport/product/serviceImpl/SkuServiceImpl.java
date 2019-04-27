@@ -46,4 +46,9 @@ public class SkuServiceImpl implements SkuService {
         }
         return price;
     }
+
+    @Override
+    public Sku selectSkuBySkuId(Long skuId) {
+        return skuMapper.selectByPrimaryKey(skuId);
+    }
 }

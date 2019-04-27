@@ -42,6 +42,7 @@ public class CustomMessageListener implements MessageListener {
             Product product = productService.selectProductById(productId);
             Float price = skuService.selectLowestPriceByProductId(productId);
 
+            // 保存商品信息到solr中
             SolrInputDocument document = new SolrInputDocument();
             document.addField("product_id", product.getId());
             document.addField("product_name", product.getName());

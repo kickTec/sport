@@ -1,24 +1,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
 		http://www.springframework.org/schema/mvc 
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
 		http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
-		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
-		http://www.springframework.org/schema/tx 
-		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-		http://www.springframework.org/schema/task
-   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
-		http://code.alibabatech.com/schema/dubbo        
-		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<!-- springmvc的核心配置文件-->
 	<!-- 扫描Controller -->
@@ -41,4 +29,14 @@
 
 	<!-- 加载dubbo的服务消费方法配置文件 -->
 	<import resource="classpath:dubbo-consumer-dev.xml"/>
+
+    <!--自定义拦截器-->
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <!--拦截路径-->
+            <mvc:mapping path="/buyer/**"/>
+            <!--拦截处理类-->
+            <bean class="com.kenick.sport.portal.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

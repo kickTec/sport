@@ -1,5 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../head.jsp" %>
+<%
+    String path = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +13,7 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 广告管理 - 列表</div>
 	<form class="ropt">
-		<input class="add" type="button" value="添加" onclick="window.location.href='add.jsp?positionId=${positionId}'"/>
+		<input class="add" type="button" value="添加" onclick="window.location.href='<%=path%>/ad/add.do?positionId=${positionId}'"/>
 	</form>
 	<div class="clear"></div>
 </div>
@@ -35,75 +38,21 @@
 		</tr>
 	</thead>
 	<tbody class="pn-ltbody">
-		<tr bgcolor="#ffffff" onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'">
-			<td><input type="checkbox" value="73" name="ids"></td>
-			<td align="center">44</td>
-			<td align="center">大广告</td>
-			<td align="center">手机</td>
-			<td align="center">javascript:;"</td>
-			<td align="center"><img width="144" height="45" src="/images/565c189bNf9721325.jpg"> </td>
-			<td align="center">670</td>
-			<td align="center">399</td>
-			<td align="center">
-			<a class="pn-opt" href="#">查看</a> | <a class="pn-opt" href="#">修改</a> | <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="#">删除</a> | <a class="pn-opt" href="../sku/list.jsp">库存</a>
-			</td>
-		</tr>
-		
-		<tr bgcolor="#ffffff" onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'">
-			<td><input type="checkbox" value="73" name="ids"></td>
-			<td align="center">45</td>
-			<td align="center">大广告</td>
-			<td align="center">电脑</td>
-			<td align="center">javascript:;"</td>
-			<td align="center"><img width="144" height="45" src="/images/565c0755N3d995d38.jpg"> </td>
-			<td align="center">670</td>
-			<td align="center">399</td>
-			<td align="center">
-			<a class="pn-opt" href="#">查看</a> | <a class="pn-opt" href="#">修改</a> | <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="#">删除</a> | <a class="pn-opt" href="../sku/list.jsp">库存</a>
-			</td>
-		</tr>
-		
-		<tr bgcolor="#ffffff" onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'">
-			<td><input type="checkbox" value="73" name="ids"></td>
-			<td align="center">46</td>
-			<td align="center">大广告</td>
-			<td align="center">洗衣液</td>
-			<td align="center">javascript:;"</td>
-			<td align="center"><img width="144" height="45" src="/images/56569f87N3b9ee5a6.jpg"> </td>
-			<td align="center">670</td>
-			<td align="center">399</td>
-			<td align="center">
-			<a class="pn-opt" href="#">查看</a> | <a class="pn-opt" href="#">修改</a> | <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="#">删除</a> | <a class="pn-opt" href="../sku/list.jsp">库存</a>
-			</td>
-		</tr>
-		
-		<tr bgcolor="#ffffff" onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'">
-			<td><input type="checkbox" value="73" name="ids"></td>
-			<td align="center">47</td>
-			<td align="center">大广告</td>
-			<td align="center">熊猫</td>
-			<td align="center">javascript:;"</td>
-			<td align="center"><img width="144" height="45" src="/images/5656b3deNcc43202a.jpg"> </td>
-			<td align="center">670</td>
-			<td align="center">399</td>
-			<td align="center">
-			<a class="pn-opt" href="#">查看</a> | <a class="pn-opt" href="#">修改</a> | <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="#">删除</a> | <a class="pn-opt" href="../sku/list.jsp">库存</a>
-			</td>
-		</tr>
-		
-		<tr bgcolor="#ffffff" onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'">
-			<td><input type="checkbox" value="73" name="ids"></td>
-			<td align="center">48</td>
-			<td align="center">大广告</td>
-			<td align="center">书籍</td>
-			<td align="center">javascript:;"</td>
-			<td align="center"><img width="144" height="45" src="/images/5653e38eNed7f4ffc.jpg"> </td>
-			<td align="center">670</td>
-			<td align="center">399</td>
-			<td align="center">
-			<a class="pn-opt" href="#">查看</a> | <a class="pn-opt" href="#">修改</a> | <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="#">删除</a> | <a class="pn-opt" href="../sku/list.jsp">库存</a>
-			</td>
-		</tr>
+	    <c:forEach items="${adList}" var="ad">
+            <tr bgcolor="#ffffff" onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'">
+                <td><input type="checkbox" value="${ad.id}" name="ids"></td>
+                <td align="center">${ad.id}</td>
+                <td align="center">${ad.position.name}</td>
+                <td align="center">${ad.title}</td>
+                <td align="center">${ad.url}</td>
+                <td align="center"><img width="144" height="45" src="<%=path%>${ad.picture}"> </td>
+                <td align="center">${ad.width}</td>
+                <td align="center">${ad.height}</td>
+                <td align="center">
+                    <a class="pn-opt" href="#">查看</a> | <a class="pn-opt" href="#">修改</a> | <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="#">删除</a> | <a class="pn-opt" href="../sku/list.jsp">库存</a>
+                </td>
+            </tr>
+        </c:forEach>
 	</tbody>
 </table>
 <div style="margin-top:15px;"><input class="del-button" type="button" value="删除" onclick="optDelete();"/><input class="add" type="button" value="上架" onclick="isShow();"/><input class="del-button" type="button" value="下架" onclick="isHide();"/></div>

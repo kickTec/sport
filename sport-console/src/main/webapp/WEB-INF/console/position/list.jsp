@@ -40,41 +40,21 @@ function addSon(){
 		</tr>
 	</thead>
 	<tbody class="pn-ltbody">
-		<tr onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'" bgcolor="#ffffff">
-			<td><input value="1" name="ids" type="checkbox"></td>
-			<td align="center">86</td>
-			<td align="center">首页 </td>
-			<td align="center"><input style="width:40px; border:1px solid #7e9db9" value="1" name="sort" type="text"></td>
-			<td align="center">
-				是
-				
-			</td>
-			<td align="center"><a class="pn-opt" href="v_edit.do?id=1">修改</a> | <a onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt" href="o_delete.do?ids=1&amp;root=">删除</a></td>
-		</tr>
-	
-		<tr onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'" bgcolor="#ffffff">
-			<td><input value="1" name="ids" type="checkbox"></td>
-			<td align="center">87</td>
-			<td align="center">列表页面 </td>
-			<td align="center"><input style="width:40px; border:1px solid #7e9db9" value="1" name="sort" type="text"></td>
-			<td align="center">
-				是
-				
-			</td>
-			<td align="center"><a class="pn-opt" href="v_edit.do?id=1">修改</a> | <a onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt" href="o_delete.do?ids=1&amp;root=">删除</a></td>
-		</tr>
-	
-		<tr onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'" bgcolor="#ffffff">
-			<td><input value="1" name="ids" type="checkbox"></td>
-			<td align="center">88</td>
-			<td align="center">详细页面 </td>
-			<td align="center"><input style="width:40px; border:1px solid #7e9db9" value="1" name="sort" type="text"></td>
-			<td align="center">
-				是
-				
-			</td>
-			<td align="center"><a class="pn-opt" href="v_edit.do?id=1">修改</a> | <a onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt" href="o_delete.do?ids=1&amp;root=">删除</a></td>
-		</tr>
+        <c:forEach items="${positionList}" var="position">
+            <tr onmouseout="this.bgColor='#ffffff'" onmouseover="this.bgColor='#eeeeee'" bgcolor="#ffffff">
+                <td><input value="${position.id}" name="ids" type="checkbox"></td>
+                <td align="center">${position.id}</td>
+                <td align="center">${position.name} </td>
+                <td align="center"><input style="width:40px; border:1px solid #7e9db9" value="${position.sort}" name="sort" type="text"></td>
+                <td align="center">
+                    <c:choose>
+                        <c:when test="${position.isEnable}">是</c:when>
+                        <c:otherwise>否</c:otherwise>
+                    </c:choose>
+                </td>
+                <td align="center"><a class="pn-opt" href="v_edit.do?id=${position.id}">修改</a> | <a onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt" href="o_delete.do?ids=${position.id}&amp;root=">删除</a></td>
+            </tr>
+        </c:forEach>
 	</tbody>
 </table>
 </div>

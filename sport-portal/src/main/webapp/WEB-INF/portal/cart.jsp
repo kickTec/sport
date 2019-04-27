@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    String path = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,13 +14,13 @@
 <meta http-equiv="expires" content="0">
 <meta name="format-detection" content="telephone=no">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/css/base.css">
-<link type="text/css" rel="stylesheet" href="/css/a.css">
-<link type="text/css" rel="stylesheet" href="/css/a_002.css">
-<link type="text/css" rel="stylesheet" href="/css/a_003.css">
-<link href="/css/purchase.2012.css?v=201410141639" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="<%=path%>/css/base.css">
+<link type="text/css" rel="stylesheet" href="<%=path%>/css/a.css">
+<link type="text/css" rel="stylesheet" href="<%=path%>/css/a_002.css">
+<link type="text/css" rel="stylesheet" href="<%=path%>/css/a_003.css">
+<link href="<%=path%>/css/purchase.2012.css?v=201410141639" rel="stylesheet" type="text/css">
 <title>我的购物车 - 新巴巴商城</title>
-<script type="text/javascript" src="/js/jquery-1.6.4.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery-1.6.4.js"></script>
 
 <script type="text/javascript">
 //全选 
@@ -26,7 +29,38 @@ function checkAll(checked){
 }
 //结算
 function trueBuy(){
-	$("#jvForm").submit();
+    var orderStr = "";
+    $("input[type=checkbox]:checked").each(function(index,item){
+        var skuId = item.value;
+        var skuAmount = $("#amount"+skuId).val();
+        orderStr = orderStr + "|" + skuId+"_"+skuAmount;
+    });
+    if(orderStr == ""){
+        alert("请至少选择一件商品!");
+	}else{
+        $("#orderInfo").val(orderStr);
+        $("#jvForm").submit();
+	}
+}
+
+function changeSkuSelect(skuId) {
+    // 获取当前购物项数量
+    var skuAmount = $("#amount"+skuId).val();
+
+    // 勾选状态
+    var checked = $("#skuId"+skuId).get(0).checked;
+
+    $.post(
+        "/shopping/changeSkuSelect",
+        {
+            skuId:skuId,
+            skuAmount:skuAmount,
+            checked:checked
+        },
+        function (data) {
+            console.log(data);
+        }
+    )
 }
 </script>
 <body>
@@ -36,7 +70,7 @@ function trueBuy(){
 	<div class="w w1 header clearfix">
 		<div id="logo">
 			<a href="/"><img
-				src="/images/XBB2.png" title="返回新巴巴商城首页" alt="返回新巴巴商城首页"></a>
+				src="<%=path%>/images/XBB2.png" title="返回新巴巴商城首页" alt="返回新巴巴商城首页"></a>
 		</div>
 		<div class="language">
 			<a href="javascript:void(0);" onclick="toEnCart()"></a>
@@ -49,12 +83,12 @@ function trueBuy(){
 			</ul>
 		</div>
 	</div>
-<c:if test="${fn:length(buyerCart.items) != 0}">
+<c:if test="${fn:length(buyerCart.buyerItems) != 0}">
 	<div class="w cart">
 		<div class="cart-hd group">
 			<h2>我的购物车</h2>
 		</div>
-		<form id="jvForm" action="/buyer/trueBuy" method="post">
+		<form id="jvForm" action="<%=path%>/buyer/trueBuy" method="post">
 		<div id="show">
 			<div class="cart-frame">
 				<div class="tl"></div>
@@ -75,34 +109,45 @@ function trueBuy(){
 				</div>
 				<div id="product-list" class="cart-tbody">
 					<!-- ************************商品开始********************* -->
-					<c:forEach items="${buyerCart.items}" var="item">
+					<c:forEach items="${buyerCart.buyerItems}" var="item">
 						<div id="product_11345721" class="item item_selected ">
 							<div class="item_form clearfix">
 								<div class="cell p-checkbox">
-									<input class="checkbox" type="checkbox" name="skuIds"
-										value="${item.sku.id }">
+									<input id="skuId${item.skuId }" onchange="changeSkuSelect(${item.skuId })" class="checkbox" type="checkbox" name="skuIds" value="${item.skuId }" <c:if test="${item.selected}">
+                                           checked="checked"
+                                    </c:if>>
 								</div>
 								<div class="cell p-goods">
 									<div class="p-img">
 										<a href="javascript:;" target="_blank"> <img
-											src="${item.sku.product.images[0]}"
-											alt="${item.sku.product.name}" width="52" height="52"></a>
+											src="${item.productUrl}"
+											alt="${item.productName}" width="52" height="52"></a>
 									</div>
+                                    <input type="hidden" id="skuPrice${item.skuId}" value="${item.skuPrice}" />
 									<div class="p-name">
-										<a href="javascrip:;"> ${item.sku.product.name}--
-											${item.sku.color.name }-- ${item.sku.size } </a>
+										<a href="javascrip:;"> ${item.productName}--
+											${item.skuColor }-- ${item.skuSize } </a>
 									</div>
 								</div>
 								<div class="cell p-price">
-									<span class="price"> ¥${item.sku.price} </span>
+									<span class="price"> ¥${item.skuPrice} </span>
 								</div>
 								<div class="cell p-promotion"></div>
-								<div class="cell p-inventory stock-11345721">有货</div>
+								<div class="cell p-inventory stock-11345721">
+                                    <c:choose>
+                                        <c:when test="${item.have}">
+                                            有
+                                        </c:when>
+                                        <c:otherwise>
+                                            无
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
 								<div class="cell p-quantity" for-stock="for-stock-11345721">
 									<div class="quantity-form">
-										<a href="javascript:void(0);" class="decrement">-</a> <input
-											value="${item.amount }" type="text" class="quantity-text">
-											<a href="javascript:void(0);" class="increment">+</a>
+										<a href="javascript:void(0);" class="decrement">-</a>
+                                        <input id="amount${item.skuId}" value="${item.amount }" type="text" class="quantity-text" onchange="changeSkuSelect(${item.skuId})">
+                                        <a href="javascript:void(0);" class="increment">+</a>
 									</div>
 								</div>
 								<div class="cell p-remove">
@@ -111,13 +156,16 @@ function trueBuy(){
 							</div>
 						</div>
 					</c:forEach>
-
 				</div>
+
+                <%--订单信息，用于传递商品信息--%>
+                <input type="hidden" name="orderInfo" id="orderInfo"/>
+
 				<!-- product-list结束 -->
 				<div class="cart-toolbar clearfix">
 					<div class="total fr">
 						<p>
-							<span class="totalSkuPrice">¥${buyerCart.productPrice }</span>商品金额：
+							<span class="totalSkuPrice">¥${buyerCart.productTotalPrice }</span>商品金额：
 						</p>
 						<p>
 							<span id="totalRePrice">- ¥${buyerCart.fee }</span>运费：
@@ -145,7 +193,7 @@ function trueBuy(){
 								</span>
 							</div>
 							<div class="total fr">
-								总计： <span class="totalSkuPrice">¥${buyerCart.totalPrice }</span>
+								总计： <span class="totalSkuPrice">¥${buyerCart.finalTotalPrice }</span>
 							</div>
 						</div>
 					</div>
@@ -156,7 +204,7 @@ function trueBuy(){
 		</form>
 	</div>
 </c:if>
-<c:if test="${fn:length(buyerCart.items) == 0}">
+<c:if test="${fn:length(buyerCart.buyerItems) == 0}">
 <div class="cart" id="container">
 <div class="w" >	
 	<div class="cart-empty">
@@ -176,10 +224,9 @@ function trueBuy(){
 </div>
 </c:if>
 <!--推荐位html修改处-->
-<script type="text/javascript" src="/js/base-v1.js"></script>
+<script type="text/javascript" src="<%=path%>/js/base-v1.js"></script>
 <!-- footer start -->
 <jsp:include page="commons/footer.jsp" />
 <!-- footer end -->
-
 </body>
 </html>
