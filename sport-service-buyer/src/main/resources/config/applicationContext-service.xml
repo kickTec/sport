@@ -26,6 +26,6 @@
 
 	<bean id="sessionProviderService" class="com.kenick.sport.buyer.serviceImpl.SessionProviderImpl">
         <!--设置用户过期时间-->
-        <property name="userExpires" value="60"/>
+        <property name="userExpires" value="7200"/>
     </bean>
 </beans>

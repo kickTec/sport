@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface BuyerService {
+
     /**
      *  根据用户名查询用户信息
      * @param username 用户名
@@ -49,4 +50,34 @@ public interface BuyerService {
      * @return redisKey对应的value值
      */
     String getStringFromRedis(String redisKey);
+
+    /**
+     *  获取redis中hKey map中key为mapKey的值
+     * @param hKey redis中map对应的名称
+     * @param mapKey map中key名称
+     * @return redis map对应key的值
+     */
+    String redisHget(String hKey,String mapKey);
+
+    /**
+     *  往redis中hKey对应的map中写入mapKey-mapValue键值对
+     * @param hKey map对应名称
+     * @param mapKey map中key
+     * @param mapValue map中value
+     * @return 是否成功
+     */
+    Boolean redisHSet(String hKey,String mapKey,String mapValue);
+
+    /**
+     *  从redis中获取订单id
+     * @return 订单id
+     */
+    Long getOrderIdFromRedis();
+
+    /**
+     *  通过用户名获取用户id
+     * @param username 用户名
+     * @return 用户id
+     */
+    Long getBuyerIdByUsername(String username);
 }

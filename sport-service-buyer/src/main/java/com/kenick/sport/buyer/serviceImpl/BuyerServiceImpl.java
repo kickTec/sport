@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +95,7 @@ public class BuyerServiceImpl implements BuyerService {
                 buyerItem.setSkuColor(color.getName());
                 buyerItem.setSkuSize(sku.getSize());
                 buyerItem.setSkuPrice(sku.getPrice());
+
                 // 是否有货判断
                 int selectAmount = amount;
                 buyerItem.setAmount(selectAmount);
@@ -107,7 +107,7 @@ public class BuyerServiceImpl implements BuyerService {
                 buyerItems.add(buyerItem);
             }
             buyerCart.setBuyerItems(buyerItems);
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return buyerCart;
@@ -154,15 +154,10 @@ public class BuyerServiceImpl implements BuyerService {
     public Boolean saveSkuMapToRedis(String redisKey,Map<Long, Integer> skuMap) {
         boolean flag;
         try {
-            Map<String, String> redisMap = jedis.hgetAll(redisKey);
             Set<Long> skuIdSet = skuMap.keySet();
             for (Long skuId : skuIdSet) {
                 Integer skuAmount = skuMap.get(skuId);
-                if (redisMap.containsKey(skuId + "")) {
-                    jedis.hset(redisKey, skuId + "", Integer.parseInt(redisMap.get(skuId + "")) + skuAmount + "");
-                } else {
-                    jedis.hset(redisKey, skuId + "", skuAmount + "");
-                }
+                jedis.hset(redisKey, skuId + "", skuAmount + "");
             }
             flag = true;
         }catch (Exception e){
@@ -181,5 +176,37 @@ public class BuyerServiceImpl implements BuyerService {
     @Override
     public String getStringFromRedis(String redisKey) {
         return jedis.get(redisKey);
+    }
+
+    @Override
+    public String redisHget(String hKey, String mapKey) {
+        String ret = jedis.hget(hKey, mapKey);
+        return ret==null?"":ret;
+    }
+
+    @Override
+    public Boolean redisHSet(String hKey, String mapKey, String mapValue) {
+        jedis.hset(hKey, mapKey, mapValue);
+        return true;
+    }
+
+    @Override
+    public Long getOrderIdFromRedis() {
+        return jedis.incr("orderId");
+    }
+
+    @Override
+    public Long getBuyerIdByUsername(String username) {
+        Long buyerId = null;
+        BuyerQuery buyerQuery = new BuyerQuery();
+        buyerQuery.createCriteria().andUsernameEqualTo(username);
+        buyerQuery.setFields("id");
+        buyerQuery.setPageNo(1);
+        buyerQuery.setPageSize(1);
+        List<Buyer> buyers = buyerMapper.selectByExample(buyerQuery);
+        if(buyers.size() > 0){
+            buyerId = buyers.get(0).getId();
+        }
+        return buyerId;
     }
 }

@@ -10,9 +10,9 @@ public class BuyerItem implements Serializable {
     private String skuColor;
     private String skuSize;
     private Float skuPrice;
-    private Boolean isHave; // 是否有货
-    private Integer amount; // 已选数量
-    private Boolean selected; // 是否选中
+    private Boolean isHave = true; // 是否有货
+    private Integer amount = 0; // 已选数量
+    private Boolean selected = false; // 是否选中
 
     public Long getSkuId() {
         return skuId;

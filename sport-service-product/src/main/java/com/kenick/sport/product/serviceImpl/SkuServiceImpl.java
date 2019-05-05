@@ -1,6 +1,10 @@
 package com.kenick.sport.product.serviceImpl;
 
+import com.kenick.sport.mapper.product.ColorMapper;
+import com.kenick.sport.mapper.product.ProductMapper;
 import com.kenick.sport.mapper.product.SkuMapper;
+import com.kenick.sport.pojo.product.Color;
+import com.kenick.sport.pojo.product.Product;
 import com.kenick.sport.pojo.product.Sku;
 import com.kenick.sport.pojo.product.SkuQuery;
 import com.kenick.sport.service.product.SkuService;
@@ -12,7 +16,13 @@ import java.util.List;
 @Service("skuService")
 public class SkuServiceImpl implements SkuService {
     @Resource
-    SkuMapper skuMapper;
+    private SkuMapper skuMapper;
+
+    @Resource
+    private ProductMapper productMapper;
+
+    @Resource
+    private ColorMapper colorMapper;
 
     @Override
     public List<Sku> selectSkuByProductId(Long productId) {
@@ -49,6 +59,11 @@ public class SkuServiceImpl implements SkuService {
 
     @Override
     public Sku selectSkuBySkuId(Long skuId) {
-        return skuMapper.selectByPrimaryKey(skuId);
+        Sku sku = skuMapper.selectByPrimaryKey(skuId);
+        Product product = productMapper.selectByPrimaryKey(sku.getProductId());
+        sku.setProduct(product);
+        Color color = colorMapper.selectByPrimaryKey(sku.getColorId());
+        sku.setColor(color);
+        return sku;
     }
 }

@@ -35,18 +35,44 @@ public class ShoppingController{
     public String buyerCart(Long skuId, Integer amount, RedirectAttributes model,
                             HttpServletRequest request, HttpServletResponse response){
         try {
+            // 获取登录用户名
+            String username = sessionProviderService.getAttributeForUsername(LoginUtil.getCSESSIONID(request,response));
+
             // 从cookie中获取购物车
-            BuyerCart buyerCart = getBuyerCartFromCookie(request);
+            BuyerCart cookieBuyerCart = getBuyerCartFromCookie(request);
 
             // 已经登录
-            if(isLogin(request,response)){
-                // 从redis中获取购物车信息
-                List<BuyerItem> redisBuyerItems = buyerService.getBuyerItemListFromRedis(PortalConstant.BUYER_CART_REDIS_KEY);
+            if(username != null && !"".equals(username)){
+                // 从redis中获取购物信息
+                List<BuyerItem> redisBuyerItems = buyerService.getBuyerItemListFromRedis(PortalConstant.BUYER_CART_REDIS_KEY+"_"+username);
 
                 // 同步cookie和redis中的购物信息
                 for(BuyerItem redisItem:redisBuyerItems){
-                    buyerCart.addBuyerItem(redisItem);
+                    cookieBuyerCart.addBuyerItem(redisItem, true);
                 }
+
+                // 添加商品到购物车中
+                cookieBuyerCart = buyerService.addSkuToBuyerCart(skuId, amount, cookieBuyerCart);
+
+                // 从cookie中获取已选择的购物项
+                Map<Long, Integer> cookieSelectItemMap = getSelectedBuyerItemFromCookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, request);
+
+                // 从redis中获取已选择的购物项 相关skuId amount相加
+                String redisSelectBuyerItemJson = buyerService.redisHget(PortalConstant.BUYER_ITEM_SELECT_REDIS_KEY, username);
+                Map<Long, Integer> redisSelectItemMap = new HashMap<>();
+                if(redisSelectBuyerItemJson != null && !"".equals(redisSelectBuyerItemJson)){
+                    redisSelectItemMap = JSON.parseObject(redisSelectBuyerItemJson, new TypeReference<Map<Long, Integer>>(){});
+                }
+                Integer oldAmount = redisSelectItemMap.get(skuId);
+                oldAmount = (oldAmount == null) ? 0 : oldAmount;
+                oldAmount = oldAmount + amount;
+                redisSelectItemMap.put(skuId, oldAmount);
+
+                // 合并cookie和redis中的已选择项
+                Map<Long,Integer> mergeSelectMap = mergeCookieRedisMap(cookieSelectItemMap, redisSelectItemMap);
+
+                // 设置购物车勾选项
+                setBuyerCartSelectedAmount(cookieBuyerCart, mergeSelectMap);
 
                 // 删除cookie购物信息
                 Cookie cookie = new Cookie(PortalConstant.BUYER_CART_COOKIE_KEY, "");
@@ -54,29 +80,36 @@ public class ShoppingController{
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
 
-                // 添加商品到购物车中
-                buyerCart = buyerService.addSkuToBuyerCart(skuId,amount,buyerCart);
-
                 // 将用户购物信息存储到redis
-                Map<Long,Integer> buyerItem = getBuyerItemFromCart(buyerCart);
-                buyerService.saveSkuMapToRedis(PortalConstant.BUYER_CART_REDIS_KEY,buyerItem);
+                Map<Long,Integer> buyerItem = getBuyerItemFromCart(cookieBuyerCart);
+                buyerService.saveSkuMapToRedis(PortalConstant.BUYER_CART_REDIS_KEY+"_"+username,buyerItem);
+
+                // 将已选择项保存到redis
+                buyerService.redisHSet(PortalConstant.BUYER_ITEM_SELECT_REDIS_KEY,username,JSON.toJSONString(mergeSelectMap));
             }else{ // 未登录
-                // 获取已选择的购物项
+                // 获取已选择的购物项 相同skuId amount相加
                 Map<Long, Integer> selectedBuyerItemMap = getSelectedBuyerItemFromCookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, request);
-                selectedBuyerItemMap.put(skuId,amount);
+                Integer oldAmount = selectedBuyerItemMap.get(skuId);
+                if(oldAmount != null){
+                    selectedBuyerItemMap.put(skuId, oldAmount+amount);
+                }else{
+                    selectedBuyerItemMap.put(skuId, amount);
+                }
 
                 // 添加商品到购物车中
-                buyerCart = buyerService.addSkuToBuyerCart(skuId,amount,buyerCart);
+                cookieBuyerCart = buyerService.addSkuToBuyerCart(skuId, amount, cookieBuyerCart);
 
                 // 设置购物车已选择项
-                setBuyerCartSelectedAmount(buyerCart, selectedBuyerItemMap);
+                setBuyerCartSelectedAmount(cookieBuyerCart, selectedBuyerItemMap);
 
                 // cookie中添加或更新购物信息
-                Map<Long,Integer> buyerItem = getBuyerItemFromCart(buyerCart);
+                Map<Long,Integer> buyerItem = getBuyerItemFromCart(cookieBuyerCart);
                 Cookie buyerCartCookie = new Cookie(PortalConstant.BUYER_CART_COOKIE_KEY, JSON.toJSONString(buyerItem));
                 buyerCartCookie.setMaxAge(3600);
                 buyerCartCookie.setPath("/");
                 response.addCookie(buyerCartCookie);
+
+                // cookie中添加或更新已选项
                 Cookie buyerItemCookie = new Cookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, JSON.toJSONString(selectedBuyerItemMap));
                 buyerItemCookie.setMaxAge(3600);
                 buyerItemCookie.setPath("/");
@@ -84,10 +117,10 @@ public class ShoppingController{
             }
 
             // 返回购物信息到页面
-            urlDecodeBuyerCart(buyerCart);
-            buyerCart.setFee(10D);
-            calcBuyerCart(buyerCart);
-            model.addFlashAttribute("buyerCart", buyerCart);
+            urlDecodeBuyerCart(cookieBuyerCart);
+            cookieBuyerCart.setFee(10D);
+            calcBuyerCart(cookieBuyerCart);
+            model.addFlashAttribute("buyerCart", cookieBuyerCart);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,39 +129,105 @@ public class ShoppingController{
 
     @RequestMapping("/toCart")
     public String toCart(BuyerCart buyerCart,Model model,HttpServletRequest request,HttpServletResponse response){
-        if(isLogin(request,response)){ // 已登录
+        String username = sessionProviderService.getAttributeForUsername(LoginUtil.getCSESSIONID(request,response));
+        BuyerCart cookieBuyerCart = getBuyerCartFromCookie(request); // 从cookie中获取购物车
+
+        if(username != null && !"".equals(username)){ // 已登录
+            List<BuyerItem> redisBuyerItems = buyerService.getBuyerItemListFromRedis(PortalConstant.BUYER_CART_REDIS_KEY+"_"+username); // 从redis中获取购物车
+
+            // 同步cookie和redis购物车中的购物信息
+            for(BuyerItem redisItem:redisBuyerItems){
+                cookieBuyerCart.addBuyerItem(redisItem, true);
+            }
             if(buyerCart == null){
                 buyerCart = new BuyerCart();
             }
-            List<BuyerItem> redisBuyerItemList = buyerService.getBuyerItemListFromRedis(PortalConstant.BUYER_CART_REDIS_KEY);
-            if(redisBuyerItemList != null){
-                buyerCart.setBuyerItems(redisBuyerItemList);
+            buyerCart.setBuyerItems(cookieBuyerCart.getBuyerItems());
+
+            // 从cookie中获取已选择的购物项
+            Map<Long, Integer> cookieSelectItemMap = getSelectedBuyerItemFromCookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, request);
+
+            // 从redis中获取已选择的购物项
+            String redisSelectBuyerItemJson = buyerService.redisHget(PortalConstant.BUYER_ITEM_SELECT_REDIS_KEY, username);
+            Map<Long, Integer> redisSelectItemMap = new HashMap<>();
+            if(redisSelectBuyerItemJson != null && !"".equals(redisSelectBuyerItemJson)){
+                redisSelectItemMap = JSON.parseObject(redisSelectBuyerItemJson, new TypeReference<Map<Long, Integer>>(){});
             }
-            String selectItemJson = buyerService.getStringFromRedis(PortalConstant.BUYER_ITEM_SELECT_REDIS_KEY);
-            Map<Long, Integer> selectedInfoMap = parseSelectedItem("orderInfo", selectItemJson);
-            setBuyerCartSelectedAmount(buyerCart,selectedInfoMap);
+
+            // 合并cookie和redis中的已选择项
+            Map<Long,Integer> mergeSelectMap = mergeCookieRedisMap(cookieSelectItemMap, redisSelectItemMap);
+            setBuyerCartSelectedAmount(buyerCart, mergeSelectMap);
+
+            // 删除cookie中的已选择项
+            Cookie cookie = new Cookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, "");
+            cookie.setPath("/");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+
+            // 将已选择项保存到redis
+            buyerService.redisHSet(PortalConstant.BUYER_ITEM_SELECT_REDIS_KEY, username, JSON.toJSONString(mergeSelectMap));
+
+            // 将用户购物信息存储到redis
+            Map<Long,Integer> buyerItem = getBuyerItemFromCart(buyerCart);
+            buyerService.saveSkuMapToRedis(PortalConstant.BUYER_CART_REDIS_KEY+"_"+username, buyerItem);
         }else{ // 未登录
-            if(buyerCart == null || buyerCart.getBuyerItems() == null){
-                buyerCart = getBuyerCartFromCookie(request);
-                // 获取已选择的购物项
-                Map<Long, Integer> selectedBuyerItemMap = getSelectedBuyerItemFromCookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, request);
-                // 设置购物车已选择项
-                setBuyerCartSelectedAmount(buyerCart, selectedBuyerItemMap);
+            if(buyerCart.getBuyerItems().size() == 0){ // 不是从页面跳转过来，从cookie中获取购物信息
+                for(BuyerItem buyerItem:cookieBuyerCart.getBuyerItems()){
+                    buyerCart.addBuyerItem(buyerItem, true);
+                }
             }
+
+            // 从页面跳转过来
+            // 获取已选择的购物项
+            Map<Long, Integer> selectedBuyerItemMap = getSelectedBuyerItemFromCookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, request);
+            setBuyerCartSelectedAmount(buyerCart, selectedBuyerItemMap);
+
+            // 设置购物车已选择项
+            setBuyerCartSelectedAmount(buyerCart, selectedBuyerItemMap);
+
+            // cookie中添加或更新购物信息
+            Map<Long,Integer> buyerItem = getBuyerItemFromCart(buyerCart);
+            Cookie buyerCartCookie = new Cookie(PortalConstant.BUYER_CART_COOKIE_KEY, JSON.toJSONString(buyerItem));
+            buyerCartCookie.setMaxAge(3600);
+            buyerCartCookie.setPath("/");
+            response.addCookie(buyerCartCookie);
+
+            // cookie中添加或更新已选项
+            Cookie buyerItemCookie = new Cookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, JSON.toJSONString(selectedBuyerItemMap));
+            buyerItemCookie.setMaxAge(3600);
+            buyerItemCookie.setPath("/");
+            response.addCookie(buyerItemCookie);
         }
         calcBuyerCart(buyerCart);
         urlDecodeBuyerCart(buyerCart);
-        model.addAttribute("buyerCart",buyerCart);
+        model.addAttribute("buyerCart", buyerCart);
         return "cart";
     }
 
     @RequestMapping("/changeSkuSelect")
     public @ResponseBody Boolean changeSkuSelect(Long skuId,Integer skuAmount,Boolean checked,
             HttpServletRequest request,HttpServletResponse response){
-        Map<Long,Integer> selectItemMap = new HashMap<>();
+        Map<Long,Integer> selectItemMap;
         String username = sessionProviderService.getAttributeForUsername(LoginUtil.getCSESSIONID(request, response));
         if(username != null && !"".equals(username)){ // 已登录
+            BuyerCart buyerCart = new BuyerCart();
+            Map<Long, Integer> selectItemRedisMap = getSelectedBuyerItemFromRedis(PortalConstant.BUYER_ITEM_SELECT_REDIS_KEY, username);
+            List<BuyerItem> redisBuyerItemList = buyerService.getBuyerItemListFromRedis(PortalConstant.BUYER_CART_REDIS_KEY);
+            if(redisBuyerItemList != null){
+                buyerCart.setBuyerItems(redisBuyerItemList);
+            }
 
+            if(checked){
+                selectItemRedisMap.put(skuId, skuAmount);
+            }else{
+                selectItemRedisMap.remove(skuId);
+            }
+            resetBuyerCartSkuAmount(buyerCart,skuId,skuAmount,checked);
+
+            // 保存购物信息
+            Map<Long,Integer> buyerItem = getBuyerItemFromCart(buyerCart);
+            buyerService.saveSkuMapToRedis(PortalConstant.BUYER_CART_REDIS_KEY,buyerItem);
+            buyerService.redisHSet(PortalConstant.BUYER_ITEM_SELECT_REDIS_KEY,username,JSON.toJSONString(selectItemRedisMap));
         }else{ // 未登录
             // 获取已选择的购物项
             selectItemMap = getSelectedBuyerItemFromCookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, request);
@@ -139,7 +238,7 @@ public class ShoppingController{
             }else{
                 selectItemMap.remove(skuId);
             }
-            resetBuyerCartSkuAmount(buyerCart,skuId,skuAmount);
+            resetBuyerCartSkuAmount(buyerCart,skuId,skuAmount,checked);
 
             Cookie buyerItemCookie = new Cookie(PortalConstant.BUYER_ITEM_SELECT_COOKIE_KEY, JSON.toJSONString(selectItemMap));
             buyerItemCookie.setMaxAge(3600);
@@ -155,8 +254,23 @@ public class ShoppingController{
         return true;
     }
 
+    // 合并cookie 和 redis选择购物项map cookie中的已选择项优先
+    private Map<Long, Integer> mergeCookieRedisMap(Map<Long, Integer> cookieSelectItemMap, Map<Long, Integer> redisSelectItemMap) {
+        if(cookieSelectItemMap == null || redisSelectItemMap == null){
+            return new HashMap<>();
+        }
+        Iterator<Long> skuIdIterator = redisSelectItemMap.keySet().iterator();
+        while(skuIdIterator.hasNext()){
+            Long skuId = skuIdIterator.next();
+            if(!cookieSelectItemMap.containsKey(skuId)){
+                cookieSelectItemMap.put(skuId,redisSelectItemMap.get(skuId));
+            }
+        }
+        return cookieSelectItemMap;
+    }
+
     // 重置购物车中的购物项
-    private void resetBuyerCartSkuAmount(BuyerCart buyerCart, Long skuId, Integer skuAmount) {
+    private void resetBuyerCartSkuAmount(BuyerCart buyerCart, Long skuId, Integer skuAmount,Boolean checked) {
         if(buyerCart == null || buyerCart.getBuyerItems() == null){
             return;
         }
@@ -166,7 +280,18 @@ public class ShoppingController{
             BuyerItem buyerItem = buyerItemIterator.next();
             if(buyerItem.getSkuId().equals(skuId)){
                 buyerItem.setAmount(skuAmount);
+                buyerItem.setSelected(checked);
             }
+        }
+    }
+
+    // 从redis中获取已选择的购物项
+    private Map<Long,Integer> getSelectedBuyerItemFromRedis(String hKey,String mapKey){
+        String selectedItemJson = buyerService.redisHget(hKey,mapKey);
+        if(selectedItemJson == null || "".equals(selectedItemJson)){
+            return new HashMap<>();
+        }else{
+            return JSON.parseObject(selectedItemJson,new TypeReference<Map<Long, Integer>>(){});
         }
     }
 
@@ -218,37 +343,6 @@ public class ShoppingController{
                 }
             }
         }
-    }
-
-    // 解析选中的购物项 "|" + skuId+"_"+skuAmount + "|" + skuId+"_"+skuAmount
-    private Map<Long,Integer> parseSelectedItem(String paramKey,String paramJson){
-        Map<Long, Integer> selectedItemMap= new HashMap<>();
-        String orderInfo = "";
-        Map paramMap = JSON.parseObject(paramJson, Map.class);
-        Set keySet = paramMap.keySet();
-        for(Object key:keySet){
-            if(paramKey.equals(key.toString())){
-                orderInfo = paramMap.get(key).toString();
-                break;
-            }
-        }
-        String[] skuArray = orderInfo.split("\\|");
-        for(String skuStr:skuArray){
-            if(skuStr != null && !"".equals(skuStr)){
-                String[] itemArray = skuStr.split("_");
-                if(itemArray.length == 2){
-                    selectedItemMap.put(Long.parseLong(itemArray[0]),Integer.parseInt(itemArray[1]));
-                }
-            }
-        }
-        return selectedItemMap;
-    }
-
-    // 是否登录
-    private Boolean isLogin(HttpServletRequest request, HttpServletResponse response){
-        String csessionid = LoginUtil.getCSESSIONID(request, response);
-        String username = sessionProviderService.getAttributeForUsername(csessionid);
-        return username!=null && !"".equals(username);
     }
 
     // 计算购物车各项值

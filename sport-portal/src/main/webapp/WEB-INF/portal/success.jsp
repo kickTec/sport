@@ -61,9 +61,9 @@
 		<div class="mc" id="success_detail">	
 		    <ul class="list-order">
 			    <li class="li-st">
-					<div class="fore1">订单号：<a href="javascript:void(0)">66666888888</a></div>
+					<div class="fore1">订单号：<a href="javascript:void(0)">${orderId}</a></div>
 					<!-- 货到付款 -->
-					<div class="fore2">货到付款：<strong class="ftx-01">361.0元</strong></div>
+					<div class="fore2">付款金额：<strong class="ftx-01">${totalPrice}元</strong></div>
 					<div class="fore3">
 					   	新巴巴快递 &nbsp; 送货时间: 预计 2016-01-13 14:49:39 送达&nbsp;
 					</div>

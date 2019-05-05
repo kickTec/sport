@@ -36,4 +36,8 @@
 				   class="com.kenick.sport.buyer.serviceImpl.BuyerServiceImpl"/>
     <dubbo:service ref="sessionProviderService" interface="com.kenick.sport.service.login.SessionProviderService"
                    class="com.kenick.sport.buyer.serviceImpl.SessionProviderImpl"/>
+	<dubbo:service ref="orderService" interface="com.kenick.sport.service.buyer.OrderService"
+				   class="com.kenick.sport.buyer.serviceImpl.OrderServiceImpl"/>
+    <dubbo:service ref="detailService" interface="com.kenick.sport.service.buyer.DetailService"
+                   class="com.kenick.sport.buyer.serviceImpl.DetailServiceImpl"/>
 </beans>

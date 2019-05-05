@@ -26,14 +26,23 @@
 //全选 
 function checkAll(checked){
 	$("input[name=skuIds]").attr("checked",checked);
+    $("input[type=checkbox]:checked").each(function(index,item){
+        var skuId = item.value;
+        if(skuId != 'on'){
+            changeSkuSelect(skuId);
+        }
+    });
 }
-//结算
+//结算  |图片_描述_价格_数量|图片_描述_价格_数量 多少件商品 商品总金额
 function trueBuy(){
     var orderStr = "";
     $("input[type=checkbox]:checked").each(function(index,item){
         var skuId = item.value;
+        var skuImg = $("#img"+skuId).val();
+        var skuDesc = $("#desc"+skuId).val();
+        var skuPrice = $("#price"+skuId).val();
         var skuAmount = $("#amount"+skuId).val();
-        orderStr = orderStr + "|" + skuId+"_"+skuAmount;
+        orderStr = orderStr + "|" + skuId + "_" + skuPrice + "_" +skuAmount;
     });
     if(orderStr == ""){
         alert("请至少选择一件商品!");
@@ -50,6 +59,8 @@ function changeSkuSelect(skuId) {
     // 勾选状态
     var checked = $("#skuId"+skuId).get(0).checked;
 
+    calcPrice();
+
     $.post(
         "/shopping/changeSkuSelect",
         {
@@ -58,9 +69,30 @@ function changeSkuSelect(skuId) {
             checked:checked
         },
         function (data) {
-            console.log(data);
         }
     )
+}
+
+function calcPrice(){
+    var productTotalPrice = 0; // 商品价格
+    var fee = 0; // 运费
+    var totalPrice = 0; // 总价格
+    $("input[type=checkbox]:checked").each(function(index,item){
+        var skuId = item.value;
+        if(skuId != 'on'){
+            var skuPrice = $("#price"+skuId).val();
+            var skuAmount = $("#amount"+skuId).val();
+            productTotalPrice = productTotalPrice + skuPrice * skuAmount;
+        }
+    });
+    $("#totalSkuPrice").text("¥"+productTotalPrice);
+
+    if(productTotalPrice > 0 && productTotalPrice < 49){
+        fee = 10;
+    }
+    totalPrice = productTotalPrice + fee;
+    $("#totalRePrice").text("¥"+fee);
+    $("#totalPrice").text("¥"+totalPrice);
 }
 </script>
 <body>
@@ -119,17 +151,17 @@ function changeSkuSelect(skuId) {
 								</div>
 								<div class="cell p-goods">
 									<div class="p-img">
-										<a href="javascript:;" target="_blank"> <img
-											src="${item.productUrl}"
-											alt="${item.productName}" width="52" height="52"></a>
+										<a href="javascript:;" target="_blank">
+                                            <img id="img${item.skuId}" src="${item.productUrl}" alt="${item.productName}" width="52" height="52">
+                                        </a>
 									</div>
-                                    <input type="hidden" id="skuPrice${item.skuId}" value="${item.skuPrice}" />
 									<div class="p-name">
-										<a href="javascrip:;"> ${item.productName}--
-											${item.skuColor }-- ${item.skuSize } </a>
+                                        <input type="hidden" id="desc${item.skuId}" value="${item.productName} -- ${item.skuColor } -- ${item.skuSize }" />
+										<a href="javascrip:;">${item.productName} -- ${item.skuColor } -- ${item.skuSize }</a>
 									</div>
 								</div>
 								<div class="cell p-price">
+                                    <input type="hidden" id="price${item.skuId}" value="${item.skuPrice}" />
 									<span class="price"> ¥${item.skuPrice} </span>
 								</div>
 								<div class="cell p-promotion"></div>
@@ -165,10 +197,10 @@ function changeSkuSelect(skuId) {
 				<div class="cart-toolbar clearfix">
 					<div class="total fr">
 						<p>
-							<span class="totalSkuPrice">¥${buyerCart.productTotalPrice }</span>商品金额：
+							<span id="totalSkuPrice" class="totalSkuPrice">¥${buyerCart.productTotalPrice }</span>商品金额：
 						</p>
 						<p>
-							<span id="totalRePrice">- ¥${buyerCart.fee }</span>运费：
+							<span id="totalRePrice">+ ¥${buyerCart.fee }</span>运费：
 						</p>
 					</div>
 					<div class="amout fr">
@@ -193,7 +225,7 @@ function changeSkuSelect(skuId) {
 								</span>
 							</div>
 							<div class="total fr">
-								总计： <span class="totalSkuPrice">¥${buyerCart.finalTotalPrice }</span>
+								总计： <span id="totalPrice" class="totalSkuPrice">¥${buyerCart.finalTotalPrice }</span>
 							</div>
 						</div>
 					</div>

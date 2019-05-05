@@ -1,5 +1,7 @@
+<%@ page import="com.kenick.sport.portal.pojo.PreOrderGood" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -181,37 +183,44 @@
 																已购满2.00元 ，再加4.00元，可返回购物车领取赠品 </strong>
 														</div>
 
-														<div class="goods-item goods-item-extra"
-															goods-id="1305606">
-
-															<div class="p-img">
-																<a target="_blank"
-																	href="http://item.jd.com/1305606.html"><img
-																	src="/order_files/565d0624N54b49906_002.jpg" alt=""></a>
-															</div>
-															<div class="goods-msg">
-																<div class="goods-msg-gel">
-																	<div class="p-name">
-																		<a href="http://item.jd.com/1305606.html"
-																			target="_blank"> 帮宝适 Pampers 超薄干爽 婴儿拉拉裤
-																			大号L84片【9-14kg】 </a>
-																	</div>
-																	<div class="p-price">
-																		<!--增加预售金额显示 begin   预售分阶段支付类型（1：一阶梯全款支付；2：一阶梯定金支付(全款或定金可选)；3：三阶梯(仅定金)；4：三阶梯(全款或定金可选)） -->
-																		<strong class="jd-price">￥135.00</strong>
-																		<!--增加预售金额显示 end-->
-																		<span class="p-num"> x1 </span> <span class="p-state"
-																			skuid="1305606">有货</span>
-
-																	</div>
-																</div>
-															</div>
-															<div>
-																<i class="p-icon p-icon-w"></i><span class="ftx-04">7天无理由退货</span>
-															</div>
-
+                                                        <c:forEach items="${preOrderGoodList}" var="preGood">
+                                                            <div class="goods-item goods-item-extra" goods-id="${preGood.productId}">
+                                                                <div class="p-img">
+                                                                    <a target="_blank"  href="http://www.baidu.com">
+                                                                        <img src="${preGood.imgUrl}" alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="goods-msg">
+                                                                    <div class="goods-msg-gel">
+                                                                        <div class="p-name">
+                                                                            <a href="http://www.baidu.com" target="_blank">
+                                                                                ${preGood.goodDesc}
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="p-price">
+                                                                            <!--增加预售金额显示 begin   预售分阶段支付类型（1：一阶梯全款支付；2：一阶梯定金支付(全款或定金可选)；3：三阶梯(仅定金)；4：三阶梯(全款或定金可选)） -->
+                                                                            <strong class="jd-price">￥${preGood.goodPrice}</strong>
+                                                                            <!--增加预售金额显示 end-->
+                                                                            <span class="p-num"> x${preGood.goodNum} </span>
+                                                                            <span class="p-state" skuid="${preGood.skuId}">
+                                                                                <c:choose>
+                                                                                    <c:when test="${preGood.have}">
+                                                                                        有货
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                        无货
+                                                                                    </c:otherwise>
+                                                                                </c:choose>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <i class="p-icon p-icon-w"></i><span class="ftx-04">7天无理由退货</span>
+                                                                </div>
+                                                            </div>
 															<div class="clr"></div>
-														</div>
+                                                        </c:forEach>
 													</div>
 												</div>
 												<!--满赠套装结束-->
@@ -496,16 +505,20 @@
 				<!--  预售 计算支付展现方式 begin -->
 				<div class="statistic fr">
 					<div class="list">
-						<span><em class="ftx-01">4</em> 件商品，总商品金额：</span> <em
-							class="price" id="warePriceId" v="343.8">￥343.80</em>
+						<span><em class="ftx-01">${productAmount}</em> 件商品，总商品金额：</span>
+                        <input type="hidden" name="orderPrice" value="${productPrice}" />
+                        <em class="price" id="warePriceId" v="${productPrice}">￥${productPrice}</em>
 					</div>
 					<div class="list">
-						<span>返现：</span> <em class="price" id="cachBackId" v="0">
-							-￥0.00</em>
+						<span>返现：</span> <em class="price" id="cachBackId" v="${cashBack}">
+							-￥${cashBack}</em>
 					</div>
 					<div class="list">
-						<span><i class="freight-icon"></i>运费：</span> <em class="price"
-							id="freightPriceId"><font color="#FF6600"> ￥18.00</font></em>
+						<span><i class="freight-icon"></i>运费：</span>
+						<em class="price" id="freightPriceId">
+                            <input type="hidden" name="fee" value="${fee}" />
+							<font color="#FF6600"> ￥${fee}</font>
+						</em>
 					</div>
 					<div class="list" id="showCouponPrice" style="display: none;">
 						<span>商品优惠：</span><em style="display: none;" class="price"
@@ -528,7 +541,9 @@
 						<span>分期手续费(由分期银行收取)：</span><em class="price" id="periodFee">￥0.00</em>
 					</div>
 					<div class="list">
-						<span>应付总额：</span> <em class="price" id="sumPayPriceId">￥361.80</em>
+						<span>应付总额：</span>
+                        <input type="hidden" name="totalPrice" value="${payPrice}" />
+                        <em class="price" id="sumPayPriceId">￥${payPrice}</em>
 					</div>
 				</div>
 				<div class="clr"></div>
@@ -540,12 +555,15 @@
 					<p>寄送至： 北京 海淀区 西三旗 XXXXXXXXXXXXXXXXX</p>
 					<p>收货人：范冰冰 158****8888</p>
 				</div>
+				<input type="hidden" name="skuIdAmountAll" id="skuIdAmountAll" />
 				<div id="checkout-floatbar" class="group">
 					<div class="ui-ceilinglamp checkout-buttons">
 						<div class="sticky-wrap">
 							<div class="inner">
-								<input type="submit" class="checkout-submit" value="提交订单" /> <span
-									class="total">应付总额：<strong id="payPrice">￥361.80</strong>
+								<input type="submit" class="checkout-submit" value="提交订单" onclick="changeParams();" />
+                                <span class="total">应付总额：
+                                    <strong id="payPrice">￥${payPrice}</strong>
+                                </span>
 							</div>
 						</div>
 					</div>
@@ -567,5 +585,22 @@
 </form>
 	<!-- /main -->
 	<jsp:include page="commons/footer.jsp" />
+
+    <script type="text/javascript">
+        function changeParams() {
+            <%
+                String skuId_amount = ""; // skuId_amount productPrice
+                String price = request.getAttribute("productPrice").toString();
+                List<PreOrderGood> preOrderGoodList = (List<PreOrderGood>)request.getAttribute("preOrderGoodList");
+                for(PreOrderGood preOrderGood:preOrderGoodList){
+                    skuId_amount = skuId_amount + "|" + preOrderGood.getSkuId() + "_" + preOrderGood.getGoodNum();
+                }
+                request.setAttribute("skuId_amount",skuId_amount);
+                request.setAttribute("price", price);
+            %>
+            var skuIdAmountStr = '${skuId_amount}';
+            $("#skuIdAmountAll").val(skuIdAmountStr);
+        }
+    </script>
 </body>
 </html>

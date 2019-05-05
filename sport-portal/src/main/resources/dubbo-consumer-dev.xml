@@ -34,6 +34,8 @@
     <dubbo:reference id="colorService" interface="com.kenick.sport.service.product.ColorService" url="dubbo://127.0.0.1:20880" check="false"/>
     <dubbo:reference id="buyerService" interface="com.kenick.sport.service.buyer.BuyerService" url="dubbo://127.0.0.1:20883" check="false"/>
 	<dubbo:reference id="sessionProviderService" interface="com.kenick.sport.service.login.SessionProviderService" url="dubbo://127.0.0.1:20883" check="false"/>
+	<dubbo:reference id="orderService" interface="com.kenick.sport.service.buyer.OrderService" url="dubbo://127.0.0.1:20883" check="false"/>
+	<dubbo:reference id="detailService" interface="com.kenick.sport.service.buyer.DetailService" url="dubbo://127.0.0.1:20883" check="false"/>
 
 	<dubbo:consumer timeout="600000"/>
 </beans>
