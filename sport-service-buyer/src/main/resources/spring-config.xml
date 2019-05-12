@@ -24,7 +24,8 @@
 	<import resource="classpath:config/applicationContext-mapper.xml"/>
 	<import resource="classpath:config/applicationContext-service.xml"/>
 	<import resource="classpath:config/applicationContext-transaction.xml"/>
-	<import resource="classpath:config/dubbo-provider-dev.xml"/>
+	<import resource="classpath:config/dubbo-provider.xml"/>
 	<import resource="classpath:config/redis.xml"/>
 	<import resource="classpath:config/solr.xml"/>
+	<!--<import resource="classpath:config/dubbo-provider-dev.xml"/>-->
 </beans>

@@ -25,20 +25,20 @@
 	<dubbo:application name="service-buyer"/>
 	
 	<!-- 配置dubbo的注册中心 -->
-	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>
+	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181" check="true"/>
 	
 	<!-- 配置dubbo协议 -->
-	<dubbo:protocol name="dubbo" port="20880"/>
+	<dubbo:protocol name="dubbo" port="20883"/>
 	
 	<!-- 将接口暴露到注册中心  ref引用具体的实现类-->
-	<dubbo:service ref="brandService" interface="com.kenick.sport.service.product.BrandService"
-				   class="com.kenick.sport.product.serviceImpl.BrandServiceImpl"/>
-	<dubbo:service ref="uploadService" interface="com.kenick.sport.service.upload.UploadService"
-				   class="com.kenick.sport.product.serviceImpl.UploadServiceImpl"/>
-	<dubbo:service ref="productService" interface="com.kenick.sport.service.product.ProductService"
-				   class="com.kenick.sport.product.serviceImpl.ProductServiceImpl"/>
-	<dubbo:service ref="colorService" interface="com.kenick.sport.service.product.ColorService"
-				   class="com.kenick.sport.product.serviceImpl.ColorServiceImpl"/>
-	<dubbo:service ref="skuService" interface="com.kenick.sport.service.product.SkuService"
-				   class="com.kenick.sport.product.serviceImpl.SkuServiceImpl"/>
+	<dubbo:service ref="buyerService" interface="com.kenick.sport.service.buyer.BuyerService"
+				   class="com.kenick.sport.buyer.serviceImpl.BuyerServiceImpl" token="true"/>
+	<dubbo:service ref="sessionProviderService" interface="com.kenick.sport.service.login.SessionProviderService"
+				   class="com.kenick.sport.buyer.serviceImpl.SessionProviderImpl" token="true"/>
+	<dubbo:service ref="orderService" interface="com.kenick.sport.service.buyer.OrderService"
+				   class="com.kenick.sport.buyer.serviceImpl.OrderServiceImpl" token="true"/>
+	<dubbo:service ref="detailService" interface="com.kenick.sport.service.buyer.DetailService"
+				   class="com.kenick.sport.buyer.serviceImpl.DetailServiceImpl" token="true"/>
+
+	<dubbo:provider timeout="6000" />
 </beans>

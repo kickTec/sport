@@ -25,14 +25,14 @@
 	<dubbo:application name="login"/>
 	
 	<!-- 配置dubbo的注册中心 -->
-	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>
+	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181" timeout="6000" check="true"/>
 	
 	<!-- 配置引用注册中心的服务-->
-	<dubbo:reference id="brandService" interface="com.kenick.sport.service.product.BrandService" check="false"/>
-	<dubbo:reference id="uploadService" interface="com.kenick.sport.service.upload.UploadService" check="false"/>
-	<dubbo:reference id="productService" interface="com.kenick.sport.service.product.ProductService" check="false"/>
-	<dubbo:reference id="colorService" interface="com.kenick.sport.service.product.ColorService" check="false"/>
-	<dubbo:reference id="skuService" interface="com.kenick.sport.service.product.SkuService" check="false"/>
+	<dubbo:reference id="brandService" interface="com.kenick.sport.service.product.BrandService" />
+	<dubbo:reference id="uploadService" interface="com.kenick.sport.service.upload.UploadService" />
+	<dubbo:reference id="productService" interface="com.kenick.sport.service.product.ProductService" />
+	<dubbo:reference id="colorService" interface="com.kenick.sport.service.product.ColorService" />
+	<dubbo:reference id="skuService" interface="com.kenick.sport.service.product.SkuService" />
 
-	<dubbo:consumer timeout="600000"/>
+	<dubbo:consumer timeout="6000" check="true"/>
 </beans>

@@ -2,9 +2,12 @@ import com.kenick.sport.pojo.product.Product;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.CloudSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,6 +27,25 @@ public class TestSolr {
 
     @Resource
     private SolrServer solrServer;
+
+    @Resource
+    private CloudSolrServer cloudSolrServer;
+
+    @Test
+    public void testSolrCloud(){
+        try {
+            SolrInputDocument solrInputDocument = new SolrInputDocument();
+            solrInputDocument.addField("id","1");
+            solrInputDocument.addField("product_id","55555");
+            solrInputDocument.addField("product_brandId","55554");
+            solrInputDocument.addField("name_ik","spring集群管理的solr");
+            cloudSolrServer.add(solrInputDocument);
+            UpdateResponse updateResponse = cloudSolrServer.commit();
+            logger.info(updateResponse.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testSolrSelectList(){

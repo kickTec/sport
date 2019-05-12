@@ -40,5 +40,6 @@
     <mvc:resources mapping="/js/**" location="/js/" />
 
 	<!-- 加载dubbo的服务消费方法配置文件 -->
-	<import resource="classpath:dubbo-consumer-dev.xml"/>
+	<import resource="classpath:dubbo-consumer.xml"/>
+	<!--<import resource="classpath:dubbo-consumer-dev.xml"/>-->
 </beans>

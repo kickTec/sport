@@ -25,20 +25,22 @@
 	<dubbo:application name="service-product"/>
 	
 	<!-- 配置dubbo的注册中心 -->
-	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>
+	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181" check="true" timeout="6000"/>
 	
 	<!-- 配置dubbo协议 -->
 	<dubbo:protocol name="dubbo" port="20880"/>
 	
 	<!-- 将接口暴露到注册中心  ref引用具体的实现类-->
 	<dubbo:service ref="brandService" interface="com.kenick.sport.service.product.BrandService"
-				   class="com.kenick.sport.product.serviceImpl.BrandServiceImpl"/>
+				   class="com.kenick.sport.product.serviceImpl.BrandServiceImpl" />
 	<dubbo:service ref="uploadService" interface="com.kenick.sport.service.upload.UploadService"
-				   class="com.kenick.sport.product.serviceImpl.UploadServiceImpl"/>
+				   class="com.kenick.sport.product.serviceImpl.UploadServiceImpl" />
 	<dubbo:service ref="productService" interface="com.kenick.sport.service.product.ProductService"
-				   class="com.kenick.sport.product.serviceImpl.ProductServiceImpl"/>
+				   class="com.kenick.sport.product.serviceImpl.ProductServiceImpl" />
 	<dubbo:service ref="colorService" interface="com.kenick.sport.service.product.ColorService"
-				   class="com.kenick.sport.product.serviceImpl.ColorServiceImpl"/>
+				   class="com.kenick.sport.product.serviceImpl.ColorServiceImpl" />
 	<dubbo:service ref="skuService" interface="com.kenick.sport.service.product.SkuService"
-				   class="com.kenick.sport.product.serviceImpl.SkuServiceImpl"/>
+				   class="com.kenick.sport.product.serviceImpl.SkuServiceImpl" />
+
+    <dubbo:provider timeout="6000" token="false" />
 </beans>

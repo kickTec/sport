@@ -10,6 +10,8 @@ import com.kenick.sport.service.product.BrandService;
 import com.kenick.sport.service.product.ColorService;
 import com.kenick.sport.service.product.ProductService;
 import com.kenick.sport.service.upload.UploadService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/product")
 public class ProductController extends BaseController{
+    private Logger logger = LoggerFactory.getLogger(ProductController.class);
+
     @Resource
     private ProductService productService;
 
@@ -44,81 +48,89 @@ public class ProductController extends BaseController{
     public String list(String productName, Long brandId, Boolean isShow,
                        Integer pageNo, Integer pageSize,
                        Model model, HttpServletRequest request){
-        if(productName != null){
-            if("GET".equals(request.getMethod())){
-                productName = new String(productName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+        try {
+            if(productName != null){
+                if("GET".equals(request.getMethod())){
+                    productName = new String(productName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+                }
             }
-        }
 
-        List<Brand> brandList = brandService.selectBrandListByQueryNoPage(new BrandQuery());
-        List<Product> productList = productService.selectProductByQuery(productName, brandId, isShow, pageNo, pageSize);
-        model.addAttribute("productList", productList);
-        model.addAttribute("brandList", brandList);
+            List<Brand> brandList = brandService.selectBrandListByQueryNoPage(new BrandQuery());
+            List<Product> productList = productService.selectProductByQuery(productName, brandId, isShow, pageNo, pageSize);
+            model.addAttribute("productList", productList);
+            model.addAttribute("brandList", brandList);
 
-        // 查询条件回显
-        if(productName != null){
-            model.addAttribute("queryProductName",productName);
-        }
-        if(brandId != null){
-            model.addAttribute("queryBrandId",brandId);
-        }
-        if(isShow != null){
-            model.addAttribute("queryIsShow",isShow?1:0);
-        }
-        if(pageNo == null){
-            pageNo = 1;
-        }
-        if(pageSize == null){
-            pageSize = 5;
-        }
+            // 查询条件回显
+            if(productName != null){
+                model.addAttribute("queryProductName",productName);
+            }
+            if(brandId != null){
+                model.addAttribute("queryBrandId",brandId);
+            }
+            if(isShow != null){
+                model.addAttribute("queryIsShow",isShow?1:0);
+            }
+            if(pageNo == null){
+                pageNo = 1;
+            }
+            if(pageSize == null){
+                pageSize = 5;
+            }
 
-        // 分页相关
-        Integer productTotalSize = productService.getProductTotalSize(productName, brandId, isShow);
-        PaginationUtil paginationUtil = new PaginationUtil();
-        paginationUtil.setPageNo(pageNo);
-        paginationUtil.setPageSize(pageSize);
-        paginationUtil.setTotalSize(productTotalSize);
+            // 分页相关
+            Integer productTotalSize = productService.getProductTotalSize(productName, brandId, isShow);
+            PaginationUtil paginationUtil = new PaginationUtil();
+            paginationUtil.setPageNo(pageNo);
+            paginationUtil.setPageSize(pageSize);
+            paginationUtil.setTotalSize(productTotalSize);
 
-        Integer prePage = paginationUtil.getPrePage();
-        Integer nextPage = paginationUtil.getNextPage();
-        Integer lastPage = paginationUtil.getLastPage();
-        List<String> centerPageList = paginationUtil.getCenterPageList(5);
-        model.addAttribute("pageNo",pageNo);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("prePage",prePage);
-        model.addAttribute("nextPage",nextPage);
-        model.addAttribute("lastPage",lastPage);
-        model.addAttribute("centerPageList",centerPageList);
+            Integer prePage = paginationUtil.getPrePage();
+            Integer nextPage = paginationUtil.getNextPage();
+            Integer lastPage = paginationUtil.getLastPage();
+            List<String> centerPageList = paginationUtil.getCenterPageList(5);
+            model.addAttribute("pageNo",pageNo);
+            model.addAttribute("pageSize",pageSize);
+            model.addAttribute("prePage",prePage);
+            model.addAttribute("nextPage",nextPage);
+            model.addAttribute("lastPage",lastPage);
+            model.addAttribute("centerPageList",centerPageList);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
         return "product/list";
     }
 
     @RequestMapping("/add.do")
     public String add(String queryProductName,Integer queryBrandId,Boolean queryIsShow,
                       Integer pageNo,Integer pageSize,Model model){
-        // 颜色信息
-        List<Color> colorList = colorService.selectColorByParentIdNot(0L);
-        if(colorList != null){
-            model.addAttribute("colorList", colorList);
-        }
+        try {
+            // 颜色信息
+            List<Color> colorList = colorService.selectColorByParentIdNot(0L);
+            if(colorList != null){
+                model.addAttribute("colorList", colorList);
+            }
 
-        // 品牌信息
-        List<Brand> brandList = brandService.selectBrandListByQueryNoPage(new BrandQuery());
-        if(brandList != null){
-            model.addAttribute("brandList", brandList);
-        }
+            // 品牌信息
+            List<Brand> brandList = brandService.selectBrandListByQueryNoPage(new BrandQuery());
+            if(brandList != null){
+                model.addAttribute("brandList", brandList);
+            }
 
-        // 返回时定位列表位置
-        if(queryProductName != null){
-            model.addAttribute("queryProductName",queryProductName);
+            // 返回时定位列表位置
+            if(queryProductName != null){
+                model.addAttribute("queryProductName",queryProductName);
+            }
+            if(queryBrandId != null){
+                model.addAttribute("queryBrandId",queryBrandId);
+            }
+            if(queryIsShow != null){
+                model.addAttribute("queryIsShow",queryIsShow);
+            }
+            model.addAttribute("pageNo",pageNo);
+            model.addAttribute("pageSize",pageSize);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
-        if(queryBrandId != null){
-            model.addAttribute("queryBrandId",queryBrandId);
-        }
-        if(queryIsShow != null){
-            model.addAttribute("queryIsShow",queryIsShow);
-        }
-        model.addAttribute("pageNo",pageNo);
-        model.addAttribute("pageSize",pageSize);
         return "product/add";
     }
 
@@ -140,7 +152,7 @@ public class ProductController extends BaseController{
             model.addAttribute("pageNo",pageNo);
             model.addAttribute("pageSize",pageSize);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return "redirect:/product/list.do";
     }
@@ -164,7 +176,7 @@ public class ProductController extends BaseController{
             model.addAttribute("pageNo", pageNo);
             model.addAttribute("pageSize", pageSize);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return "redirect:/product/list.do";
     }
@@ -174,7 +186,7 @@ public class ProductController extends BaseController{
         try {
             productService.isShow(ids);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return "redirect:/product/list.do";
     }
@@ -194,7 +206,7 @@ public class ProductController extends BaseController{
                 imgUrl = imgUrl + super.savePic(pic, request) + ",";
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return imgUrl;
     }

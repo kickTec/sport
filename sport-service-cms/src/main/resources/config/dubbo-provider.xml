@@ -25,12 +25,18 @@
 	<dubbo:application name="service-cms"/>
 	
 	<!-- 配置dubbo的注册中心 -->
-	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181"/>
+	<dubbo:registry protocol="zookeeper" address="192.168.200.140:2181" check="true" timeout="6000"/>
 	
 	<!-- 配置dubbo协议 -->
 	<dubbo:protocol name="dubbo" port="20882"/>
 	
 	<!-- 将接口暴露到注册中心  ref引用具体的实现类-->
-	<dubbo:service ref="cmsService" interface="com.kenick.sport.service.CmsService"
-				   class="com.kenick.sport.cms.serviceImpl.CmsServiceImpl"/>
+    <dubbo:service ref="cmsService" interface="com.kenick.sport.service.CmsService"
+                   class="com.kenick.sport.cms.serviceImpl.CmsServiceImpl"/>
+    <dubbo:service ref="adService" interface="com.kenick.sport.service.product.AdService"
+                   class="com.kenick.sport.cms.serviceImpl.AdServiceImpl"/>
+    <dubbo:service ref="positionService" interface="com.kenick.sport.service.product.PositionService"
+                   class="com.kenick.sport.cms.serviceImpl.PositionServiceImpl"/>
+
+	<dubbo:provider token="true" timeout="6000" />
 </beans>

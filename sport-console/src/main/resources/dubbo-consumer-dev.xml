@@ -33,5 +33,5 @@
 	<dubbo:reference id="adService" interface="com.kenick.sport.service.product.AdService" url="dubbo://127.0.0.1:20882" check="false"/>
 	<dubbo:reference id="positionService" interface="com.kenick.sport.service.product.PositionService" url="dubbo://127.0.0.1:20882" check="false"/>
 
-	<dubbo:consumer timeout="600000"/>
+	<dubbo:consumer timeout="10000"/>
 </beans>
